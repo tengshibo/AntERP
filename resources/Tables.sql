@@ -64,9 +64,9 @@ CREATE TABLE `tbl_custom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This is custom info table.';$$
 
 /* This is role table built-in record. */
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (1,'超级用户');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (2,'管理层');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (3,'财务人员');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (4,'库管');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (5,'业务员');$$
+INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (1,'超级用户','2012-04-21 12:00:00');$$
+INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (2,'管理层','2012-04-21 12:00:00');$$
+INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (3,'财务人员','2012-04-21 12:00:00');$$
+INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (4,'库管','2012-04-21 12:00:00');$$
+INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (5,'业务员','2012-04-21 12:00:00');$$
 
