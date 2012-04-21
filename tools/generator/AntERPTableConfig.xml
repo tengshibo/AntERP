@@ -16,7 +16,7 @@
 			password="123456" />
 		<javaModelGenerator targetPackage="com.anterp.mybatis.domain"
 			targetProject="E:\tmp" />
-		<sqlMapGenerator targetPackage="com.anterp.mybatis.sql"
+		<sqlMapGenerator targetPackage="com.anterp.mybatis.mappersql"
 			targetProject="E:\tmp" />
 		<javaClientGenerator targetPackage="com.anterp.mybatis.mapper"
 			targetProject="E:\tmp" type="XMLMAPPER" />
