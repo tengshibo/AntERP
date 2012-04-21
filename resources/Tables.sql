@@ -64,9 +64,9 @@ CREATE TABLE `tbl_custom` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='This is custom info table.';$$
 
 /* This is role table built-in record. */
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (1,'≥¨º∂”√ªß');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (2,'π‹¿Ì≤„');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (3,'≤∆ŒÒ»À‘±');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (4,'ø‚π‹');$$
-INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (5,'“µŒÒ‘±');$$
+INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (1,'Ë∂ÖÁ∫ßÁî®Êà∑');$$
+INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (2,'ÁÆ°ÁêÜÂ±Ç');$$
+INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (3,'Ë¥¢Âä°‰∫∫Âëò');$$
+INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (4,'Â∫ìÁÆ°');$$
+INSERT INTO `tbl_role` (roleId,`roleName`) VALUES (5,'‰∏öÂä°Âëò');$$
 

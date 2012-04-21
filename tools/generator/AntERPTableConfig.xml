@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry location="E:\java\gitProject\AntERP\webRoot\WEB-INF\lib\mysql-connector-java-5.1.19-bin.jar" />
+	<context id="anterp" targetRuntime="MyBatis3">
+		<property name="suppressTypeWarnings" value="true" />
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<commentGenerator>
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/anterp" userId="root"
+			password="123456" />
+		<javaModelGenerator targetPackage="com.anterp.mybatis.domain"
+			targetProject="E:\tmp" />
+		<sqlMapGenerator targetPackage="com.anterp.mybatis.sql"
+			targetProject="E:\tmp" />
+		<javaClientGenerator targetPackage="com.anterp.mybatis.mapper"
+			targetProject="E:\tmp" type="XMLMAPPER" />
+
+		<table tableName="tbl_account" domainObjectName="Account">
+			<generatedKey column="accId" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		<table tableName="tbl_role" domainObjectName="Role" />
+		<table tableName="tbl_acc_role" domainObjectName="AccountRole" />
+		<table tableName="tbl_custom" domainObjectName="Custom">
+			<generatedKey column="custId" sqlStatement="SELECT LAST_INSERT_ID()" />
+		</table>
+		<table tableName="tbl_privilege" domainObjectName="Privilege" />
+		<table tableName="tbl_role_pvg" domainObjectName="Privilege" />
+
+	</context>
+
+</generatorConfiguration>
