@@ -22,6 +22,17 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
+	<!-- do not intercept static resources -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+
+	<!-- Support restful URL -->
 	<servlet-mapping>
 		<servlet-name>AntERPServer</servlet-name>
 		<url-pattern>/</url-pattern>
