@@ -1,0 +1,1 @@
+Put common JS file into this folder.
