@@ -1,0 +1,1 @@
+Put images that page used into this folder.
