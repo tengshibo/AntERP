@@ -34,11 +34,11 @@
 			</div>
 		</div>
 		<div class="formTr">
-			<div class="floatLeft" id="loginBtn">
-				<input type="button" value="Login">
+			<div id="changePwdBtn" class="floatLeft">
+				<input type="button" value="Change Password" />
 			</div>
-			<div id="changePwdBtn">
-				<input type="button" value="Change Password">
+			<div id="loginBtn" class="loginBtn">
+				<input type="button" value="Login Button" />
 			</div>
 		</div>
 	</div>

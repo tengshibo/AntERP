@@ -7,6 +7,7 @@ CREATE TABLE `tbl_account` (
   `empName` varchar(32) DEFAULT NULL,
   `accName` varchar(64) NOT NULL,
   `accPwd` varchar(32) NOT NULL,
+  `status` int(11) DEFAULT 0,
   `age` int(11) DEFAULT NULL,
   `gender` smallint(6) DEFAULT NULL,
   `phoneNo` varchar(45) DEFAULT NULL,
@@ -70,3 +71,5 @@ INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (3,'财务人�
 INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (4,'库管','2012-04-21 12:00:00');$$
 INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (5,'业务员','2012-04-21 12:00:00');$$
 
+/* Insert built-in account. */
+INSERT INTO `tbl_account` (`accName`, `accPwd`) VALUES ('AntERP', '123456');$$
