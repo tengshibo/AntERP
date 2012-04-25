@@ -24,13 +24,13 @@
 		<div class="formTr">
 			<div class="loginInputLabel floatLeft">Account:</div>
 			<div class="loginInputText">
-				<input type="text" maxlength="64" size="24" />
+				<input id="accName" type="text" maxlength="64" size="24" />
 			</div>
 		</div>
 		<div class="formTr">
 			<div class="loginInputLabel floatLeft">Password:</div>
 			<div class="loginInputText">
-				<input type="password" maxlength="32" size="24" />
+				<input id="accPwd" type="password" maxlength="32" size="24" />
 			</div>
 		</div>
 		<div class="formTr">
