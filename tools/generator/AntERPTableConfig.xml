@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
-	<classPathEntry location="E:\java\gitProject\AntERP\webRoot\WEB-INF\lib\mysql-connector-java-5.1.19-bin.jar" />
+	<classPathEntry location="D:\DTWorkSpace\Mirrors\gitProject\AntERP\WebContent\WEB-INF\lib\mysql-connector-java-5.1.19-bin.jar" />
 	<context id="anterp" targetRuntime="MyBatis3">
 		<property name="suppressTypeWarnings" value="true" />
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
@@ -15,11 +15,11 @@
 			connectionURL="jdbc:mysql://localhost:3306/anterp" userId="root"
 			password="123456" />
 		<javaModelGenerator targetPackage="com.anterp.mybatis.domain"
-			targetProject="E:\tmp" />
+			targetProject="D:\tmp" />
 		<sqlMapGenerator targetPackage="com.anterp.mybatis.mappersql"
-			targetProject="E:\tmp" />
+			targetProject="D:\tmp" />
 		<javaClientGenerator targetPackage="com.anterp.mybatis.mapper"
-			targetProject="E:\tmp" type="XMLMAPPER" />
+			targetProject="D:\tmp" type="XMLMAPPER" />
 
 		<table tableName="tbl_account" domainObjectName="Account">
 			<generatedKey column="accId" sqlStatement="SELECT LAST_INSERT_ID()" />
@@ -30,7 +30,7 @@
 			<generatedKey column="custId" sqlStatement="SELECT LAST_INSERT_ID()" />
 		</table>
 		<table tableName="tbl_privilege" domainObjectName="Privilege" />
-		<table tableName="tbl_role_pvg" domainObjectName="Privilege" />
+		<table tableName="tbl_role_pvg" domainObjectName="RolePrivilege" />
 
 	</context>
 

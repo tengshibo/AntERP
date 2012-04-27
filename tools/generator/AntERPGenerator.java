@@ -26,7 +26,7 @@ public class AntERPGenerator {
 		// File configFile = new
 		// File(findFile("generator/AntERPTableConfig.xml"));
 		File configFile = new File(
-				"E:/java/gitProject/AntERP/tools/generator/AntERPTableConfig.xml");
+				"D:/DTWorkSpace/Mirrors/gitProject/AntERP/tools/generator/AntERPTableConfig.xml");
 
 		System.out.println(configFile.getAbsolutePath());
 		try {

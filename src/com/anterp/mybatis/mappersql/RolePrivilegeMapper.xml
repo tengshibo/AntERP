@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.anterp.mybatis.mapper.PrivilegeMapper" >
-  <resultMap id="BaseResultMap" type="com.anterp.mybatis.domain.Privilege" >
-    <result column="pvgId" property="pvgid" jdbcType="INTEGER" />
-    <result column="functionCode" property="functioncode" jdbcType="VARCHAR" />
+<mapper namespace="com.anterp.mybatis.mapper.RolePrivilegeMapper" >
+  <resultMap id="BaseResultMap" type="com.anterp.mybatis.domain.RolePrivilege" >
+    <result column="roleId" property="roleid" jdbcType="INTEGER" />
+    <result column="pvgId" property="pvgid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    pvgId, functionCode
+    roleId, pvgId
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.anterp.mybatis.domain.PrivilegeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.anterp.mybatis.domain.RolePrivilegeExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from tbl_privilege
+    from tbl_role_pvg
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -80,49 +80,49 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.anterp.mybatis.domain.PrivilegeExample" >
-    delete from tbl_privilege
+  <delete id="deleteByExample" parameterType="com.anterp.mybatis.domain.RolePrivilegeExample" >
+    delete from tbl_role_pvg
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.anterp.mybatis.domain.Privilege" >
-    insert into tbl_privilege (pvgId, functionCode)
-    values (#{pvgid,jdbcType=INTEGER}, #{functioncode,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.anterp.mybatis.domain.RolePrivilege" >
+    insert into tbl_role_pvg (roleId, pvgId)
+    values (#{roleid,jdbcType=INTEGER}, #{pvgid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.anterp.mybatis.domain.Privilege" >
-    insert into tbl_privilege
+  <insert id="insertSelective" parameterType="com.anterp.mybatis.domain.RolePrivilege" >
+    insert into tbl_role_pvg
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleid != null" >
+        roleId,
+      </if>
       <if test="pvgid != null" >
         pvgId,
       </if>
-      <if test="functioncode != null" >
-        functionCode,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="pvgid != null" >
-        #{pvgid,jdbcType=INTEGER},
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
       </if>
-      <if test="functioncode != null" >
-        #{functioncode,jdbcType=VARCHAR},
+      <if test="pvgid != null" >
+        #{pvgid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.anterp.mybatis.domain.PrivilegeExample" resultType="java.lang.Integer" >
-    select count(*) from tbl_privilege
+  <select id="countByExample" parameterType="com.anterp.mybatis.domain.RolePrivilegeExample" resultType="java.lang.Integer" >
+    select count(*) from tbl_role_pvg
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update tbl_privilege
+    update tbl_role_pvg
     <set >
-      <if test="record.pvgid != null" >
-        pvgId = #{record.pvgid,jdbcType=INTEGER},
+      <if test="record.roleid != null" >
+        roleId = #{record.roleid,jdbcType=INTEGER},
       </if>
-      <if test="record.functioncode != null" >
-        functionCode = #{record.functioncode,jdbcType=VARCHAR},
+      <if test="record.pvgid != null" >
+        pvgId = #{record.pvgid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -130,9 +130,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update tbl_privilege
-    set pvgId = #{record.pvgid,jdbcType=INTEGER},
-      functionCode = #{record.functioncode,jdbcType=VARCHAR}
+    update tbl_role_pvg
+    set roleId = #{record.roleid,jdbcType=INTEGER},
+      pvgId = #{record.pvgid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>

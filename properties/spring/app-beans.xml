@@ -26,7 +26,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
-	<bean id="esignageMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	<bean id="antERPMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionTemplate" ref="anterpSqlSessionTemplate" />
 		<property name="basePackage"
 			value="com.anterp.mybatis.mapper,com.anterp.mybatis.dao" />

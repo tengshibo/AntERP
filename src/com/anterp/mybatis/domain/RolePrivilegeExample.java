@@ -3,14 +3,14 @@ package com.anterp.mybatis.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrivilegeExample {
+public class RolePrivilegeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PrivilegeExample() {
+    public RolePrivilegeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,6 +104,66 @@ public class PrivilegeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
+        public Criteria andRoleidIsNull() {
+            addCriterion("roleId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidIsNotNull() {
+            addCriterion("roleId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidEqualTo(Integer value) {
+            addCriterion("roleId =", value, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidNotEqualTo(Integer value) {
+            addCriterion("roleId <>", value, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidGreaterThan(Integer value) {
+            addCriterion("roleId >", value, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("roleId >=", value, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidLessThan(Integer value) {
+            addCriterion("roleId <", value, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidLessThanOrEqualTo(Integer value) {
+            addCriterion("roleId <=", value, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidIn(List<Integer> values) {
+            addCriterion("roleId in", values, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidNotIn(List<Integer> values) {
+            addCriterion("roleId not in", values, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidBetween(Integer value1, Integer value2) {
+            addCriterion("roleId between", value1, value2, "roleid");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleidNotBetween(Integer value1, Integer value2) {
+            addCriterion("roleId not between", value1, value2, "roleid");
+            return (Criteria) this;
+        }
+
         public Criteria andPvgidIsNull() {
             addCriterion("pvgId is null");
             return (Criteria) this;
@@ -114,123 +174,63 @@ public class PrivilegeExample {
             return (Criteria) this;
         }
 
-        public Criteria andPvgidEqualTo(Integer value) {
+        public Criteria andPvgidEqualTo(String value) {
             addCriterion("pvgId =", value, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidNotEqualTo(Integer value) {
+        public Criteria andPvgidNotEqualTo(String value) {
             addCriterion("pvgId <>", value, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidGreaterThan(Integer value) {
+        public Criteria andPvgidGreaterThan(String value) {
             addCriterion("pvgId >", value, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPvgidGreaterThanOrEqualTo(String value) {
             addCriterion("pvgId >=", value, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidLessThan(Integer value) {
+        public Criteria andPvgidLessThan(String value) {
             addCriterion("pvgId <", value, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidLessThanOrEqualTo(Integer value) {
+        public Criteria andPvgidLessThanOrEqualTo(String value) {
             addCriterion("pvgId <=", value, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidIn(List<Integer> values) {
+        public Criteria andPvgidLike(String value) {
+            addCriterion("pvgId like", value, "pvgid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPvgidNotLike(String value) {
+            addCriterion("pvgId not like", value, "pvgid");
+            return (Criteria) this;
+        }
+
+        public Criteria andPvgidIn(List<String> values) {
             addCriterion("pvgId in", values, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidNotIn(List<Integer> values) {
+        public Criteria andPvgidNotIn(List<String> values) {
             addCriterion("pvgId not in", values, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidBetween(Integer value1, Integer value2) {
+        public Criteria andPvgidBetween(String value1, String value2) {
             addCriterion("pvgId between", value1, value2, "pvgid");
             return (Criteria) this;
         }
 
-        public Criteria andPvgidNotBetween(Integer value1, Integer value2) {
+        public Criteria andPvgidNotBetween(String value1, String value2) {
             addCriterion("pvgId not between", value1, value2, "pvgid");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeIsNull() {
-            addCriterion("functionCode is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeIsNotNull() {
-            addCriterion("functionCode is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeEqualTo(String value) {
-            addCriterion("functionCode =", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeNotEqualTo(String value) {
-            addCriterion("functionCode <>", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeGreaterThan(String value) {
-            addCriterion("functionCode >", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeGreaterThanOrEqualTo(String value) {
-            addCriterion("functionCode >=", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeLessThan(String value) {
-            addCriterion("functionCode <", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeLessThanOrEqualTo(String value) {
-            addCriterion("functionCode <=", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeLike(String value) {
-            addCriterion("functionCode like", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeNotLike(String value) {
-            addCriterion("functionCode not like", value, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeIn(List<String> values) {
-            addCriterion("functionCode in", values, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeNotIn(List<String> values) {
-            addCriterion("functionCode not in", values, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeBetween(String value1, String value2) {
-            addCriterion("functionCode between", value1, value2, "functioncode");
-            return (Criteria) this;
-        }
-
-        public Criteria andFunctioncodeNotBetween(String value1, String value2) {
-            addCriterion("functionCode not between", value1, value2, "functioncode");
             return (Criteria) this;
         }
     }
@@ -241,8 +241,8 @@ public class PrivilegeExample {
             super();
         }
 
-        public Criteria andFunctioncodeLikeInsensitive(String value) {
-            addCriterion("upper(functionCode) like", value.toUpperCase(), "functioncode");
+        public Criteria andPvgidLikeInsensitive(String value) {
+            addCriterion("upper(pvgId) like", value.toUpperCase(), "pvgid");
             return this;
         }
     }
