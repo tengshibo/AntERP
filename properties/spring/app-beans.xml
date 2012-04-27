@@ -32,6 +32,17 @@
 			value="com.anterp.mybatis.mapper,com.anterp.mybatis.dao" />
 	</bean>
 
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+	<bean id="urlBasedViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="aerpJsonView" class="com.anterp.views.AerpJsonView"></bean>
+
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 

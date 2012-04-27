@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<base href="<%=basePath%>">
 <title>AntERP Login</title>
 <meta charset="UTF-8">
 
@@ -20,7 +20,8 @@
 </head>
 
 <body>
-	<div id="loginForm" class="loginDiv">
+	<form id="loginForm" style="display: none;" action="" method="post"></form>
+	<div id="loginFormDiv" class="loginDiv">
 		<div class="formTr">
 			<div class="loginInputLabel floatLeft">Account:</div>
 			<div class="loginInputText">
