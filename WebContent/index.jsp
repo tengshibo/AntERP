@@ -1,11 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-
+<%@include file="/WEB-INF/modules/common/CommonHead.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
