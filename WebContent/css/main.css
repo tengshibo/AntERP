@@ -1,0 +1,44 @@
+html {
+	padding: 75px 0px 0px 0px; /*top,right,bottom,left*/
+	overflow: auto;
+	min-width: 1260px;
+	min-height: 650px;
+}
+
+#topDiv {
+	margin-top: -75px;
+	height: 75px;
+	width: 100%;
+	border: 0px solid #060;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	background-color: blue;
+}
+
+#center_main {
+	height: 100%;
+	width: 100%;
+	border: 0px solid #00F;
+}
+
+#leftMenu {
+	margin-left: -75px;
+	width: 75px;
+	height: 100%;
+	border: 0px solid #060;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	float: left;
+	background-color: gray;
+}
+
+#rightContent {
+	padding-left: 75px;
+	width: 100%;
+	overflow: auto;
+	float: left;
+	background-color: olive;
+	overflow: auto;
+}
