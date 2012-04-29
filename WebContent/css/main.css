@@ -16,28 +16,33 @@ html {
 	background-color: blue;
 }
 
-#center_main {
+#centerMain {
 	height: 100%;
 	width: 100%;
 	border: 0px solid #00F;
+	background-color: navy;
 }
 
 #leftMenu {
-	margin-left: -75px;
-	width: 75px;
-	height: 100%;
-	border: 0px solid #060;
-	margin-left: auto;
-	margin-right: auto;
-	position: relative;
 	float: left;
-	background-color: gray;
+	width: 200px;
+	background: red;
 }
 
-#rightContent {
-	padding-left: 75px;
-	overflow: auto;
-	float: left;
-	background-color: olive;
-	overflow: auto;
+#rightContentWrapper {
+	float: right;
+	margin: 0 0 0 -215px;
+	width: 100%;
+	height: 100%;
+}
+
+#rightContentDiv {
+	margin: 0 0 0 215px;
+	height: 100%;
+	background: #e4e4e4;
+}
+
+#rightIframe {
+	height: 100%;
+	width: 100%;
 }
