@@ -27,8 +27,8 @@ function Index() {
 	};
 
 	me.doLogin = function() {
-		loginForm.action = "door/in;jsessionid=" + window.jsessionid;
-		loginForm.submit();
+		document.loginForm.action = "door/in;jsessionid=" + window.jsessionid;
+		document.loginForm.submit();
 	};
 }
 

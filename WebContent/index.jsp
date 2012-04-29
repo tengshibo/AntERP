@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<form id="loginForm" style="display: none;" action="" method="post"></form>
+	<form id="loginForm" name="loginForm" style="display: none;" action="" method="post"></form>
 	<div id="loginFormDiv" class="loginDiv">
 		<div class="formTr">
 			<div class="loginInputLabel floatLeft">Account:</div>
