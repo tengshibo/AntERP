@@ -13,16 +13,13 @@
 <script type="text/javascript" src="js/wresize.js"></script>
 <script type="text/javascript" src="modules/init/main.js"></script>
 </head>
-<body style="height: 700px;">
-	<div id="topDiv">This is top div, you can put common widgets or
-		banner.</div>
-	<div id="centerMain">
-		<div id="rightContentWrapper">
-			<div id="rightContentDiv">
-				<iframe id="rightIframe" src="http://www.baidu.com"></iframe>
-			</div>
-		</div>
+<body>
+	<div id="topDiv">欢迎使用AntERP 系统</div>
+	<div id="downWrapperDiv">
 		<div id="leftMenu">你好</div>
+		<div id="centerMain" style="width: 800px;">
+			<iframe id="rightIframe" src="http://www.baidu.com"></iframe>
+		</div>
 	</div>
 </body>
 </html>

@@ -4,4 +4,5 @@
 	-o-box-sizing: border-box; /*Opera9.6*/
 	-ms-box-sizing: border-box; /*IE8*/
 	box-sizing: border-box;
+	margin: 0px;
 }
