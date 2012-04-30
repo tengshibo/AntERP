@@ -6,7 +6,7 @@
 <head>
 <base href="<%=basePath%>">
 <meta charset="UTF-8">
-<title>AntERP</title>
+<title>AntERP 账户管理</title>
 <link rel="stylesheet" type="text/css" href="css/base.css" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>

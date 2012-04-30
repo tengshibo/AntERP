@@ -13,13 +13,13 @@
 	</listener>
 
 	<filter>
-		<filter-name>EncodingFilter</filter-name>
-		<filter-class>com.anterp.init.EncodingFilter</filter-class>
+		<filter-name>HttpFilter</filter-name>
+		<filter-class>com.anterp.init.HttpFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
-		<filter-name>EncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<filter-name>HttpFilter</filter-name>
+		<url-pattern>/modules/*</url-pattern>
 	</filter-mapping>
 
 	<servlet>
