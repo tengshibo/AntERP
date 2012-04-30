@@ -9,7 +9,7 @@ html {
 	width: 100%;
 	border: 0px solid #060;
 	position: relative;
-	background-color: blue;
+	background-color: green;
 }
 
 #downWrapperDiv {
@@ -21,11 +21,10 @@ html {
 	float: left;
 	width: 200px;
 	height: 100%;
-	background: red;
+	background: gray;
 }
 
-#centerMain {
-	/* float: left; */
+#centerMain { /* float: left; */
 	float: right;
 	height: 100%;
 	width: 800px;
@@ -35,4 +34,13 @@ html {
 
 #rightIframe {
 	width: 100%;
+}
+
+/******************************************/
+.antMenu {
+	margin-top: 10px;
+}
+
+.antMenuHeightLight {
+	background-color: orange;
 }

@@ -16,7 +16,10 @@
 <body>
 	<div id="topDiv">欢迎使用AntERP 系统</div>
 	<div id="downWrapperDiv">
-		<div id="leftMenu">你好</div>
+		<div id="leftMenu">
+			<div class="antMenu antMenuHeightLight">客户资料</div>
+			<div class="antMenu">员工资料</div>
+		</div>
 		<div id="centerMain" style="width: 800px;">
 			<iframe id="rightIframe" src="http://www.baidu.com"></iframe>
 		</div>
