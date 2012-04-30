@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" type="text/css" href="css/site.css">
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/wresize.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 
 </head>
@@ -18,15 +19,15 @@
 	<form id="loginForm" name="loginForm" style="display: none;" action="" method="post"></form>
 	<div id="loginFormDiv" class="loginDiv">
 		<div class="formTr">
-			<div class="loginInputLabel floatLeft">账户:</div>
+			<div class="loginInputLabel floatLeft">账 户:</div>
 			<div class="loginInputText">
-				<input id="accName" type="text" maxlength="64" size="24" />
+				<input class="inputW" id="accName" type="text" maxlength="64" size="16" />
 			</div>
 		</div>
 		<div class="formTr">
-			<div class="loginInputLabel floatLeft">密码:</div>
+			<div class="loginInputLabel floatLeft">密 码:</div>
 			<div class="loginInputText">
-				<input id="accPwd" type="password" maxlength="32" size="24" />
+				<input class="inputW" id="accPwd" type="password" maxlength="32" size="16" />
 			</div>
 		</div>
 		<div class="formTr">

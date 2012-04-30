@@ -1,11 +1,20 @@
 @CHARSET "UTF-8";
 
 .loginDiv {
+	position: relative;
 	width: 300px;
+}
+
+.formTr {
+	margin-top: 8px;
 }
 
 .loginInputLabel {
 	width: 80px;
+}
+
+.inputW {
+	width: 120px;
 }
 
 .loginDiv .floatLeft {
@@ -14,5 +23,5 @@
 
 .loginBtn {
 	float: right;
-	margin-right: 35px;
+	margin-right: 95px;
 }
