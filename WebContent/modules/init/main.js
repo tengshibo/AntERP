@@ -19,17 +19,9 @@ function MainPage() {
 	me.attachEvents = function() {
 		var wresize = new Wresize();
 		wresize.attachWindowResize(me.doResize);
-
 		jQuery("#leftMenu .antMenu").each(function(index) {
 			jQuery(this).bind("click", me.highlightTab);
 		});
-
-		// jQuery("#custom_menu").bind("click", function() {
-		// jQuery("#rightIframe").attr("src", "modules/custom/custom.jsp");
-		// });
-		// jQuery("#account_menu").bind("click", function() {
-		// jQuery("#rightIframe").attr("src", "modules/account/account.jsp");
-		// });
 	};
 
 	me.highlightTab = function() {
