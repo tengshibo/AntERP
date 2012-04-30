@@ -48,10 +48,10 @@ public class InOutController {
 	public String checkIn(HttpSession httpSession) {
 		if (httpSession.getAttribute(Controllers.AccInfo) != null) {
 			//return "redirect:http://www.baidu.com";
-			return "forward:/WEB-INF/modules/init/main.jsp";
+			//return "forward:/WEB-INF/modules/init/main.jsp";
 			
-			//无法redirect 因为在web-inf下面， 除非放出去,那样得加过滤器， 没登录不让访问jsp
-			//return "redirect:/modules/init/main.jsp";
+			// 在web-inf下面无法redirect， 除非放出去,那样得加过滤器， 没登录不让访问jsp
+			return "redirect:/modules/init/main.jsp";
 			//return "redirect:/test.html";
 			
 			//这个用viewResolver 也可以(OK)

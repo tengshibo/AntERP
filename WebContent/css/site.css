@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
+/* Login JSP */
 .loginDiv {
 	position: relative;
 	width: 300px;
@@ -25,3 +26,5 @@
 	float: right;
 	margin-right: 95px;
 }
+
+/* main jsp */
