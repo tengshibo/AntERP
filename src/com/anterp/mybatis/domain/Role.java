@@ -1,7 +1,7 @@
 package com.anterp.mybatis.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Role implements Serializable {
     private Integer roleid;
@@ -10,9 +10,9 @@ public class Role implements Serializable {
 
     private String description;
 
-    private Date createtime;
+    private Timestamp createtime;
 
-    private Date lastmodifytime;
+    private Timestamp lastmodifytime;
 
     private static final long serialVersionUID = 1L;
 
@@ -40,19 +40,19 @@ public class Role implements Serializable {
         this.description = description;
     }
 
-    public Date getCreatetime() {
+    public Timestamp getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Timestamp createtime) {
         this.createtime = createtime;
     }
 
-    public Date getLastmodifytime() {
+    public Timestamp getLastmodifytime() {
         return lastmodifytime;
     }
 
-    public void setLastmodifytime(Date lastmodifytime) {
+    public void setLastmodifytime(Timestamp lastmodifytime) {
         this.lastmodifytime = lastmodifytime;
     }
 

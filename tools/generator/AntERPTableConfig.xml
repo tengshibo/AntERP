@@ -23,11 +23,18 @@
 
 		<table tableName="tbl_account" domainObjectName="Account">
 			<generatedKey column="accId" sqlStatement="SELECT LAST_INSERT_ID()" />
+			<columnOverride column="createTime" javaType="java.sql.Timestamp"></columnOverride>
+			<columnOverride column="lastModifyTime" javaType="java.sql.Timestamp"></columnOverride>
 		</table>
-		<table tableName="tbl_role" domainObjectName="Role" />
+		<table tableName="tbl_role" domainObjectName="Role">
+			<columnOverride column="createTime" javaType="java.sql.Timestamp"></columnOverride>
+			<columnOverride column="lastModifyTime" javaType="java.sql.Timestamp"></columnOverride>
+		</table>
 		<table tableName="tbl_acc_role" domainObjectName="AccountRole" />
 		<table tableName="tbl_custom" domainObjectName="Custom">
 			<generatedKey column="custId" sqlStatement="SELECT LAST_INSERT_ID()" />
+			<columnOverride column="createTime" javaType="java.sql.Timestamp"></columnOverride>
+			<columnOverride column="lastModifyTime" javaType="java.sql.Timestamp"></columnOverride>
 		</table>
 		<table tableName="tbl_privilege" domainObjectName="Privilege" />
 		<table tableName="tbl_role_pvg" domainObjectName="RolePrivilege" />

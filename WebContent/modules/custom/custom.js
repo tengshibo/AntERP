@@ -88,6 +88,10 @@ function Custom() {
 			}
 		});
 	};
+	
+	me.afterCreateCustom = function(){
+		// 刷新页面
+	};
 }
 
 jQuery(document).ready(function() {

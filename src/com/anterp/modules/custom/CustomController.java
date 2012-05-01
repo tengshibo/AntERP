@@ -1,5 +1,6 @@
 package com.anterp.modules.custom;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -31,6 +32,7 @@ public class CustomController {
 	@RequestMapping("/getAll")
 	public String getAllCustom(@RequestParam("page") int page,
 			@RequestParam("rows") int rows, Model model) {
+		// 查询条件
 		CustomExample example = new CustomExample();
 		customMapper.selectByExample(example);
 		// 分页参数
@@ -46,8 +48,16 @@ public class CustomController {
 		model.addAttribute("total", Pagers.getTotalPage(totalNumber, rows));
 		model.addAttribute("records", totalNumber);
 
-		System.out.println("page:" + page + ",rows:" + rows);
-		System.out.println(customs.size());
+		// System.out.println("page:" + page + ",rows:" + rows);
+		// System.out.println(customs.size());
+		return Controllers.JsonViewName;
+	}
+
+	@RequestMapping("/create")
+	public String createCustom(Custom custom) {
+		
+		Timestamp s;
+		
 		return Controllers.JsonViewName;
 	}
 

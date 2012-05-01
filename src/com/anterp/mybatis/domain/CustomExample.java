@@ -1,5 +1,6 @@
 package com.anterp.mybatis.domain;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -635,52 +636,52 @@ public class CustomExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeEqualTo(Date value) {
+        public Criteria andCreatetimeEqualTo(Timestamp value) {
             addCriterion("createTime =", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotEqualTo(Date value) {
+        public Criteria andCreatetimeNotEqualTo(Timestamp value) {
             addCriterion("createTime <>", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThan(Date value) {
+        public Criteria andCreatetimeGreaterThan(Timestamp value) {
             addCriterion("createTime >", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Timestamp value) {
             addCriterion("createTime >=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThan(Date value) {
+        public Criteria andCreatetimeLessThan(Timestamp value) {
             addCriterion("createTime <", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+        public Criteria andCreatetimeLessThanOrEqualTo(Timestamp value) {
             addCriterion("createTime <=", value, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeIn(List<Date> values) {
+        public Criteria andCreatetimeIn(List<Timestamp> values) {
             addCriterion("createTime in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotIn(List<Date> values) {
+        public Criteria andCreatetimeNotIn(List<Timestamp> values) {
             addCriterion("createTime not in", values, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeBetween(Timestamp value1, Timestamp value2) {
             addCriterion("createTime between", value1, value2, "createtime");
             return (Criteria) this;
         }
 
-        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+        public Criteria andCreatetimeNotBetween(Timestamp value1, Timestamp value2) {
             addCriterion("createTime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
@@ -695,52 +696,52 @@ public class CustomExample {
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeEqualTo(Date value) {
+        public Criteria andLastmodifytimeEqualTo(Timestamp value) {
             addCriterion("lastModifyTime =", value, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeNotEqualTo(Date value) {
+        public Criteria andLastmodifytimeNotEqualTo(Timestamp value) {
             addCriterion("lastModifyTime <>", value, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeGreaterThan(Date value) {
+        public Criteria andLastmodifytimeGreaterThan(Timestamp value) {
             addCriterion("lastModifyTime >", value, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andLastmodifytimeGreaterThanOrEqualTo(Timestamp value) {
             addCriterion("lastModifyTime >=", value, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeLessThan(Date value) {
+        public Criteria andLastmodifytimeLessThan(Timestamp value) {
             addCriterion("lastModifyTime <", value, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeLessThanOrEqualTo(Date value) {
+        public Criteria andLastmodifytimeLessThanOrEqualTo(Timestamp value) {
             addCriterion("lastModifyTime <=", value, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeIn(List<Date> values) {
+        public Criteria andLastmodifytimeIn(List<Timestamp> values) {
             addCriterion("lastModifyTime in", values, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeNotIn(List<Date> values) {
+        public Criteria andLastmodifytimeNotIn(List<Timestamp> values) {
             addCriterion("lastModifyTime not in", values, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeBetween(Date value1, Date value2) {
+        public Criteria andLastmodifytimeBetween(Timestamp value1, Timestamp value2) {
             addCriterion("lastModifyTime between", value1, value2, "lastmodifytime");
             return (Criteria) this;
         }
 
-        public Criteria andLastmodifytimeNotBetween(Date value1, Date value2) {
+        public Criteria andLastmodifytimeNotBetween(Timestamp value1, Timestamp value2) {
             addCriterion("lastModifyTime not between", value1, value2, "lastmodifytime");
             return (Criteria) this;
         }

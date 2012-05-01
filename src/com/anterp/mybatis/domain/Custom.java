@@ -1,6 +1,7 @@
 package com.anterp.mybatis.domain;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Custom implements Serializable {
@@ -20,9 +21,9 @@ public class Custom implements Serializable {
 
     private String familydesc;
 
-    private Date createtime;
+    private Timestamp createtime;
 
-    private Date lastmodifytime;
+    private Timestamp lastmodifytime;
 
     private static final long serialVersionUID = 1L;
 
@@ -90,19 +91,19 @@ public class Custom implements Serializable {
         this.familydesc = familydesc;
     }
 
-    public Date getCreatetime() {
+    public Timestamp getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(Timestamp createtime) {
         this.createtime = createtime;
     }
 
-    public Date getLastmodifytime() {
+    public Timestamp getLastmodifytime() {
         return lastmodifytime;
     }
 
-    public void setLastmodifytime(Date lastmodifytime) {
+    public void setLastmodifytime(Timestamp lastmodifytime) {
         this.lastmodifytime = lastmodifytime;
     }
 
