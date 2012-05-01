@@ -33,16 +33,13 @@ function Custom() {
 			page : "page",
 			rows : "rows"
 		},
-		rowList : [ "15", "20","50", "100", "500" ],
+		rowList : [ "15", "20", "50", "100", "500" ],
 		rowNum : "20",
 		repeatitems : false,
 		viewrecords : true,
 		emptyrecords : "查询结果为空!",
 		pager : "#customListPager",
-		sortable : false,
-		onSelectRow : function(id) {
-			alert("haha");
-		}
+		sortable : false
 	};
 
 	me.showAllCustom = function() {
@@ -57,12 +54,21 @@ function Custom() {
 		// 'overflow-x' : 'hidden' });
 	};
 
+	me.attachEvents = function() {
+		jQuery("#createCustom").bind("click", me.createCustom);
+	};
+
+	// 新建客户资料
+	me.createCustom = function() {
+		
+	};
 }
 
 jQuery(document).ready(function() {
 	var custom = new Custom();
 	// show the custom data table
 	custom.showAllCustom();
-
+	// bind event
+	me.attachEvents();
 	// jQuery("#customListTable")
 });
