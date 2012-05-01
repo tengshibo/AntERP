@@ -10,8 +10,11 @@
 <link rel="stylesheet" type="text/css" href="css/base.css" />
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+	window.accountInfo = <%=session.getAttribute("accountInfoJson")%>;
+	alert(window.accountInfo);
+</script>
 </head>
-<body>
-	Custom Page!
+<body>Custom Page!
 </body>
 </html>

@@ -1,9 +1,13 @@
 package com.anterp.modules.inout;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +29,8 @@ public class InOutController {
 	@RequestMapping("/check")
 	public String check(@RequestParam("accName") String accName,
 			@RequestParam("accPwd") String accPwd, Model model,
-			HttpSession httpSession) {
+			HttpSession httpSession) throws JsonGenerationException,
+			JsonMappingException, IOException {
 		AccountExample example = new AccountExample();
 		example.createCriteria().andAccnameEqualTo(accName)
 				.andAccpwdEqualTo(accPwd);
@@ -34,6 +39,11 @@ public class InOutController {
 			Account account = accounts.get(0);
 			// session里需要存放 "账户信息"
 			httpSession.setAttribute(Controllers.AccInfo, account);
+
+			ObjectMapper objectMapper = new ObjectMapper();
+			String accountInfoJson = objectMapper.writeValueAsString(account);
+			httpSession.setAttribute(Controllers.AccInfoJson, accountInfoJson);
+
 			// session里还需要存放 "权限信息"(TODO)
 			Controllers.setSuccess(model);
 			model.addAttribute("jsessionid", httpSession.getId());
@@ -47,15 +57,15 @@ public class InOutController {
 	@RequestMapping("/in")
 	public String checkIn(HttpSession httpSession) {
 		if (httpSession.getAttribute(Controllers.AccInfo) != null) {
-			//return "redirect:http://www.baidu.com";
-			//return "forward:/WEB-INF/modules/init/main.jsp";
-			
+			// return "redirect:http://www.baidu.com";
+			// return "forward:/WEB-INF/modules/init/main.jsp";
+
 			// 在web-inf下面无法redirect， 除非放出去,那样得加过滤器， 没登录不让访问jsp
 			return "redirect:/modules/init/main.jsp";
-			//return "redirect:/test.html";
-			
-			//这个用viewResolver 也可以(OK)
-			//return "modules/init/main";
+			// return "redirect:/test.html";
+
+			// 这个用viewResolver 也可以(OK)
+			// return "modules/init/main";
 		}
 		return "redirect:/index.jsp";
 	}
