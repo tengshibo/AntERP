@@ -11,8 +11,10 @@
 <link rel="stylesheet" type="text/css" href="css/main.css" />
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
 <script type="text/javascript">
-	window.accountInfo = <%=session.getAttribute("accountInfoJson")%>;
-	alert(window.accountInfo);
+	if (!window.accountInfoJson) {
+		window.accountInfoJson = <%=session.getAttribute("accountInfoJson")%>;
+	}
+	alert(window.accountInfoJson.accname);
 </script>
 </head>
 <body>Custom Page!
