@@ -54,10 +54,13 @@ public class CustomController {
 	}
 
 	@RequestMapping("/create")
-	public String createCustom(Custom custom) {
+	public String createCustom(Custom custom, Model model) {
+		System.out.println(custom.getCustname());
 		
-		Timestamp s;
-		
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		custom.setCreatetime(now);
+		custom.setLastmodifytime(now);
+		//this.customMapper.insert(custom);
 		return Controllers.JsonViewName;
 	}
 
