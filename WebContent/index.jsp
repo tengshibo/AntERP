@@ -12,6 +12,7 @@
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
 <script type="text/javascript" src="js/wresize.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/validatebox.js"></script>
 
 </head>
 
@@ -21,13 +22,13 @@
 		<div class="formTr">
 			<div class="loginInputLabel floatLeft">账 户:</div>
 			<div class="loginInputText">
-				<input class="inputW" id="accName" type="text" maxlength="64" size="16" />
+				<input class="inputW required num_letter isLengthOf" id="accName" type="text" v_maxlength="64" v_minlength="1"   maxlength="64" size="16" />
 			</div>
 		</div>
 		<div class="formTr">
 			<div class="loginInputLabel floatLeft">密 码:</div>
 			<div class="loginInputText">
-				<input class="inputW" id="accPwd" type="password" maxlength="32" size="16" />
+				<input class="inputW required num_letter isLengthOf" id="accPwd" type="password"  v_maxlength="32" v_minlength="1" maxlength="32" size="16" />
 			</div>
 		</div>
 		<div class="formTr">

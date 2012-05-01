@@ -2,13 +2,19 @@ function Index() {
 	var me = this;
 
 	me.clickLoginButton = function() {
+		//check input .
+		if(!checksubmit(document.forms[0])){
+			return ;
+		};
+		
 		var accName = jQuery("#accName").val();
 		var accPwd = jQuery("#accPwd").val();
+	    
 		var params = {
 			accName : accName,
 			accPwd : accPwd
 		};
-
+		
 		// invoke AntERPUtil to valid form
 		jQuery.ajax({
 			url : "door/check",
