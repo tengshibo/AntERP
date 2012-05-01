@@ -33,19 +33,28 @@ function Custom() {
 			page : "page",
 			rows : "rows"
 		},
-		rowList : [ "5", "10", "50", "100", "500" ],
+		rowList : [ "15", "20","50", "100", "500" ],
+		rowNum : "20",
 		repeatitems : false,
 		viewrecords : true,
 		emptyrecords : "查询结果为空!",
 		pager : "#customListPager",
-		rowNum : 10,
-		sortable : false
+		sortable : false,
+		onSelectRow : function(id) {
+			alert("haha");
+		}
 	};
 
 	me.showAllCustom = function() {
 		jQuery("#customListTable").jqGrid(jqGridOptin);
-		jQuery("#customListTable").navGrid('#customListPager',{edit:false,add:false,del:false,search:false});
-		jQuery("#customListTable").closest(".ui-jqgrid-bdiv").css({ 'overflow-x' : 'hidden' });
+		jQuery("#customListTable").navGrid('#customListPager', {
+			edit : true,
+			add : true,
+			del : true,
+			search : true
+		});
+		// jQuery("#customListTable").closest(".ui-jqgrid-bdiv").css({
+		// 'overflow-x' : 'hidden' });
 	};
 
 }
