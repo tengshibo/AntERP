@@ -7,33 +7,59 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.anterp.modules.Controllers;
+import com.anterp.modules.Pagers;
 import com.anterp.mybatis.domain.AccountExample;
 import com.anterp.mybatis.domain.Custom;
+import com.anterp.mybatis.mapper.AccountMapper;
 
 @Controller
 @RequestMapping("/modules/account")
 public class AccountController {
+	
+	
+	@Autowired
+	private AccountMapper accountMapper;
 
 	@Autowired
 	@Qualifier("anterpSqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@RequestMapping("/getAll")
-	public String getAllCustom() {
+	public String getAllAccount(@RequestParam("page") int page,
+			@RequestParam("rows") int rows, Model model) {
 		AccountExample example = new AccountExample();
 		example.createCriteria().andAccnameLike("%Ant%");
 		// 分页参数
-		RowBounds rowBounds = new RowBounds(0, 2);		
+		// 分页参数
+		RowBounds rowBounds = new RowBounds(Pagers.getOffset(page, rows), rows);
+		int totalNumber = accountMapper.countByExample(example);
+	
 		@SuppressWarnings("unchecked")
 		List<Custom> customs = (List<Custom>) sqlSessionTemplate.selectList(
 				"com.anterp.mybatis.mapper.AccountMapper.selectByExample",
 				example, rowBounds);		
-		System.out.println(customs.size());
+		model.addAttribute("rows", customs);
+		model.addAttribute("page", page);
+		model.addAttribute("total", Pagers.getTotalPage(totalNumber, rows));
+		model.addAttribute("records", totalNumber);
+		
 		return Controllers.JsonViewName;
 	}
+	
+	@RequestMapping("/delAccount")
+	public void delAccount(@RequestParam("accId") int accountId){
+		
+		AccountExample example = new AccountExample();
+		example.createCriteria().andAccidEqualTo(accountId);
+		accountMapper.deleteByExample(example);
+		
+	}
+	
 	
 
 }
