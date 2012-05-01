@@ -60,7 +60,33 @@ function Custom() {
 
 	// 新建客户资料
 	me.createCustom = function() {
-		
+		jQuery.ajax({
+			url : "modules/custom/customDetail.html",
+			type : "post",
+			success : function(data) {
+				var content = '<div id="customDetailDialog">'+data +"</div>";
+				jQuery(content).dialog({
+					title : "客户信息",
+					modal : true,
+					resizable : false,
+					height : "auto",
+					width : "340",
+					buttons : [ 
+					{
+						text : "保存",
+						click : function() {
+							jQuery(this).dialog("close");
+						}
+					}, 
+					{
+						text : "取消",
+						click : function() {
+							jQuery(this).dialog("close");
+						}
+					} ]
+				});
+			}
+		});
 	};
 }
 
@@ -69,6 +95,6 @@ jQuery(document).ready(function() {
 	// show the custom data table
 	custom.showAllCustom();
 	// bind event
-	me.attachEvents();
+	custom.attachEvents();
 	// jQuery("#customListTable")
 });

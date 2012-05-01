@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+#customDetailDiv {
+	width: 300px;
+}
+
+.divTr {
+	margin-top: 20px;
+}
+
+.divTdLeft {
+	text-align: right;
+}
+
+.divTdRight {
+	float: right;
+	width: 180px;
+}
+
+/* #birthYear {
+	width: 50px;
+} */
+
+/* #birthMonth {
+	width: 30px;
+}
+
+#birthDay {
+	width: 30px;
+} */
