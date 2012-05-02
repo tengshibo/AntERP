@@ -1,28 +1,68 @@
 function Custom() {
 	var me = this;
 
+	me.genderFormatter = function(cellvalue, options, rowObject) {
+		if (cellvalue == 0) {
+			return "男";
+		} else {
+			return "女";
+		}
+	};
+
+	me.birthdayFormatter = function(cellvalue, options, rowObject) {
+		var date = new Date();
+		date.setTime(cellvalue);
+		return date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
+	};
+
+	me.cellattr = function(rowId, val, rawObject, cm, rdata) {
+		return JSON.stringify(rawObject);
+	};
+
+	me.actFormatter = function(cellvalue, options, rawObject) {
+		var detail = '<input type="button" value="详情" onclick="showCustomDetail('
+				+ rawObject.custid + ',' + options.rowId + ')">';
+
+		var deleteBtn = '<input type="button" value="删除" onclick="deleteCustom('
+				+ rawObject.custid + ')">';
+
+		return "&nbsp;&nbsp;&nbsp;\t" + detail + "&nbsp;&nbsp;&nbsp;\t"
+				+ deleteBtn;
+	};
+
 	var jqGridOptin = {
 		url : "modules/custom/getAll",
 		datatype : "json",
 		mtype : "post",
 		height : "100%",
 		autowidth : true,
-		caption : "",
-		colNames : [ "姓名", "性别", "年龄", "出生日期", "电话", "地址" ],
+		caption : "客户资料",
+		colNames : [ "ID", "姓名", "性别", "年龄", "出生日期", "电话", "地址", "操作" ],
 		colModel : [ {
+			name : "custId",
+			cellattr : me.cellattr,
+			hidden : true
+		}, {
 			name : "custname"
 		}, {
-			name : "gender"
+			name : "gender",
+			formatter : me.genderFormatter
 		}, {
 			name : "age"
 		}, {
-			name : "birthday"
+			name : "birthday",
+			formatter : me.birthdayFormatter
 		}, {
 			name : "phoneno"
 		}, {
 			name : "address"
+		}, {
+			name : "act",
+			title : false,
+			formatter : me.actFormatter
 		} ],
 		jsonReader : {
+			userdata : "rows",
 			root : "rows",// 所有数据项
 			page : "page",// 当前页数
 			total : "total",// 总页数
@@ -39,7 +79,10 @@ function Custom() {
 		viewrecords : true,
 		emptyrecords : "查询结果为空!",
 		pager : "#customListPager",
-		sortable : false
+		sortable : true,
+		onSelectRow : function(id) {
+			// alert(id);
+		}
 	};
 
 	me.showAllCustom = function() {
@@ -58,41 +101,63 @@ function Custom() {
 		jQuery("#createCustom").bind("click", me.createCustom);
 	};
 
+	me.deleteCustom = function(custId) {
+		alert("delete custom:" + custId);
+	};
+
+	me.showCustomDetail = function(custId, rowId) {
+		// 高亮这一行
+		jQuery("#customListTable").jqGrid('setSelection', rowId);
+		// 取出这行对应Custom对象
+		var userData = jQuery("#customListTable").jqGrid("getGridParam",
+				"userData");
+		var current = userData[rowId];
+		alert("showCustomDetail:" + JSON.stringify(current));
+	};
+
 	// 新建客户资料
 	me.createCustom = function() {
-		jQuery.ajax({
-			url : "modules/custom/customDetail.html",
-			type : "post",
-			success : function(data) {
-				var content = '<div id="customDetailDialog">'+data +"</div>";
-				jQuery(content).dialog({
-					title : "客户信息",
-					modal : true,
-					resizable : false,
-					height : "auto",
-					width : "340",
-					buttons : [ 
-					{
-						text : "保存",
-						click : function() {
-							jQuery(this).dialog("close");
-						}
-					}, 
-					{
-						text : "取消",
-						click : function() {
-							jQuery(this).dialog("close");
-						}
-					} ]
+		jQuery
+				.ajax({
+					url : "modules/custom/customDetail.html",
+					type : "post",
+					success : function(data) {
+						var content = '<div id="customDetailDialog">' + data
+								+ "</div>";
+						jQuery(content).dialog({
+							title : "客户信息",
+							modal : true,
+							resizable : false,
+							height : "auto",
+							width : "340",
+							buttons : [ {
+								text : "保存",
+								click : function() {
+									jQuery(this).dialog("close");
+								}
+							}, {
+								text : "取消",
+								click : function() {
+									jQuery(this).dialog("close");
+								}
+							} ]
+						});
+					}
 				});
-			}
-		});
 	};
-	
-	me.afterCreateCustom = function(){
+
+	me.afterCreateCustom = function() {
 		// 刷新页面
 	};
 }
+
+var deleteCustom = function(custId) {
+	new Custom().deleteCustom(custId);
+};
+
+var showCustomDetail = function(custId, rowId) {
+	new Custom().showCustomDetail(custId, rowId);
+};
 
 jQuery(document).ready(function() {
 	var custom = new Custom();
