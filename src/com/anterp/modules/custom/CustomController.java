@@ -56,12 +56,27 @@ public class CustomController {
 	@RequestMapping("/create")
 	public String createCustom(Custom custom, Model model) {
 		System.out.println(custom.getCustname());
-		
+
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		custom.setCreatetime(now);
 		custom.setLastmodifytime(now);
-		//this.customMapper.insert(custom);
+		// this.customMapper.insert(custom);
+		return Controllers.JsonViewName;
+	}
+	
+	@RequestMapping("/update")
+	public String updateCustom(Custom custom, Model model) {
+		System.out.println(custom.getCustname());
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		custom.setCreatetime(now);
+		custom.setLastmodifytime(now);
+		//this.customMapper.updateByPrimaryKey(custom);
 		return Controllers.JsonViewName;
 	}
 
+	@RequestMapping("/delete")
+	public String deleteCustom(@RequestParam("custId") int custId) {
+		this.customMapper.deleteByPrimaryKey(custId);
+		return Controllers.JsonViewName;
+	}
 }
