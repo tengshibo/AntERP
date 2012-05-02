@@ -17,7 +17,7 @@ function Account() {
 			    {name : "status"}, 
 			    {name : "age"}, 
 			    {name : "gender"},
-			    {name : "phoneNo"},
+			    {name : "phoneno"},
 			    {name : "urgentPhone",hidden:true},
 			    {name : "address",hidden:true},
 			    {name : "createTime",hidden:true},
@@ -51,7 +51,8 @@ function Account() {
 				afterInsertRow:function(id,rd,data){
 					jQuery("#accountListTable").jqGrid("setRowData",id,
 					    {
-						act:"&nbsp;&nbsp;&nbsp;<a href='' onclick=''>详情</a>"+
+						
+						act:"&nbsp;&nbsp;&nbsp;<input type='button' class='b_foot' value='详情' onclick='createAccount()'></input>"+
 							"&nbsp;&nbsp;&nbsp;<input type='button' class='b_foot' value='删除' onclick='delAccountById("+data.accid+")'></input>"
 					    }
 						);
@@ -75,6 +76,7 @@ function Account() {
 			data : params,
 			dataType : "json",
 			success : function(data) {
+				$("#accountListTable").trigger("reloadGrid");
 				if (data.ok == false) {
 					alert(data.errorDesc);
 					return;
@@ -86,7 +88,42 @@ function Account() {
 		});
 		
 	};
-
+    //新建账户
+	me.createAccount =function(obj){
+	   // alert(obj.accid);
+		jQuery.ajax({
+			url : "modules/account/accountDetail.jsp",
+			type : "post",
+			success : function(data) {
+				var content = '<div id="accountDetailDialog">'+data +"</div>";
+				jQuery(content).dialog({
+					title : "账户信息",
+					modal : true,
+					resizable : false,
+					height : "auto",
+					width : "340",
+					buttons : [ 
+					{
+						text : "保存",
+						click : function() {
+							jQuery(this).dialog("close");
+						}
+					}, 
+					{
+						text : "取消",
+						click : function() {
+							jQuery(this).dialog("close");
+						}
+					} ]
+				});
+			}
+		});
+		
+		
+	};
+	
+	
+	
 }
 
 jQuery(document).ready(function() {
@@ -98,3 +135,6 @@ var delAccountById =function(accountId){
 	new Account().delAccount(accountId);	
 };
 
+var createAccount =function(data){
+	new Account().createAccount(data);	
+};
