@@ -14,12 +14,16 @@
 </script>
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="widget/jgUI/css/ui-lightness/jquery-ui-1.8.20.custom.css" />
+<script type="text/javascript" src="widget/jgUI/js/jquery-ui-1.8.20.custom.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="widget/jqGrid/css/ui.jqgrid.css" />
 <script src="widget/jqGrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
 <script src="widget/jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script src="modules/account/account.js" type="text/javascript"></script>
 </head>
 <body>
+    <div id="accountFuncDiv">
+		<input id="createAccount" type="button" value="新建账户"/>
+	</div>
 	<table id="accountListTable"><tr><td/></tr></table>
 	<div id="accountListPager"></div>
 </body>

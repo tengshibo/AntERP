@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.anterp.modules.Controllers;
 import com.anterp.modules.Pagers;
+import com.anterp.mybatis.domain.Account;
 import com.anterp.mybatis.domain.AccountExample;
 import com.anterp.mybatis.domain.Custom;
 import com.anterp.mybatis.mapper.AccountMapper;
+import com.anterp.tool.DateUtil;
 
 @Controller
 @RequestMapping("/modules/account")
@@ -54,11 +56,18 @@ public class AccountController {
 	@RequestMapping("/delAccount")
 	public void delAccount(@RequestParam("accId") int accountId){
 		
-		AccountExample example = new AccountExample();
-		example.createCriteria().andAccidEqualTo(accountId);
-		accountMapper.deleteByExample(example);
-		
+		accountMapper.deleteByPrimaryKey(accountId);
 	}
+	
+	@RequestMapping("/updateAccount")
+	public String updateAccount(Account account, Model model){
+		
+		account.setLastmodifytime(DateUtil.getCurrentTime());
+		accountMapper.updateByPrimaryKey(account);
+		
+		return Controllers.JsonViewName;
+	}
+	
 	
 	
 
