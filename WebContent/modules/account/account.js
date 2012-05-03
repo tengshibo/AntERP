@@ -1,6 +1,5 @@
 function Account() {
 	var me = this;
-
 	me.showAccountInfo = function() {
 		jQuery("#accountListTable").jqGrid({
 			url : "modules/account/getAll",
@@ -50,9 +49,8 @@ function Account() {
 				
 				afterInsertRow:function(id,rd,data){
 					jQuery("#accountListTable").jqGrid("setRowData",id,
-					    {
-						
-						act:"&nbsp;&nbsp;&nbsp;<input type='button' class='b_foot' value='详情' onclick='createAccount()'></input>"+
+					    {						
+						act:"&nbsp;&nbsp;&nbsp;<input type='button' class='b_foot' value='详情' onclick='createAccount("+id+")'></input>"+
 							"&nbsp;&nbsp;&nbsp;<input type='button' class='b_foot' value='删除' onclick='delAccountById("+data.accid+")'></input>"
 					    }
 						);
@@ -90,10 +88,13 @@ function Account() {
 	};
     //新建账户
 	me.createAccount =function(obj){
-	   // alert(obj.accid);
+		var params = {
+				accId : obj.accid
+			};
 		jQuery.ajax({
 			url : "modules/account/accountDetail.jsp",
 			type : "post",
+			data : params,
 			success : function(data) {
 				var content = '<div id="accountDetailDialog">'+data +"</div>";
 				jQuery(content).dialog({
@@ -125,16 +126,20 @@ function Account() {
 	
 	
 }
-
+//默认查询显示账户信息.
 jQuery(document).ready(function() {
 	new Account().showAccountInfo();
-
 });
-
+//删除账户.
 var delAccountById =function(accountId){
 	new Account().delAccount(accountId);	
 };
-
-var createAccount =function(data){
+//查看账户详细.
+var createAccount =function(rowid){
+	var data = jQuery("#accountListTable").jqGrid("getRowData",rowid);
 	new Account().createAccount(data);	
 };
+
+
+
+

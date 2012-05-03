@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/modules/common/CommonHead.jsp"%>
+
+<% String accId =request.getParameter("accId"); %>
+
 <div id="customDetailDiv">
 	<div class="divTr">
 		<label class="divTdLeft">员工姓名:</label>
@@ -11,7 +14,7 @@
 	<div class="divTr">
 		<label class="divTdLeft">员工账户:</label>
 		<div class="divTd divTdRight">
-			<input id="accname" type="text">
+			<input id="accname" type="text" value="<%=accId %>">
 		</div>
 	</div>
 	<div class="divTr">
