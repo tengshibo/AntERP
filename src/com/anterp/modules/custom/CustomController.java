@@ -1,14 +1,22 @@
 package com.anterp.modules.custom;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +25,7 @@ import com.anterp.modules.Pagers;
 import com.anterp.mybatis.domain.Custom;
 import com.anterp.mybatis.domain.CustomExample;
 import com.anterp.mybatis.mapper.CustomMapper;
+import com.anterp.tool.JsonUtil;
 
 @Controller
 @RequestMapping("/modules/custom")
@@ -52,14 +61,19 @@ public class CustomController {
 		// System.out.println(customs.size());
 		return Controllers.JsonViewName;
 	}
+	
+	
 
 	@RequestMapping("/create")
-	public String createCustom(Custom custom, Model model) {
+	public String createCustom(@RequestParam("custom") String customStr, Model model) {
+		System.out.println(customStr);
+		Custom custom = JsonUtil.getObject(Custom.class, customStr);
+		
 		System.out.println(custom.getCustname());
-
+		
 		Timestamp now = new Timestamp(System.currentTimeMillis());
-		custom.setCreatetime(now);
-		custom.setLastmodifytime(now);
+//		custom.setCreatetime(now);
+//		custom.setLastmodifytime(now);
 		// this.customMapper.insert(custom);
 		return Controllers.JsonViewName;
 	}

@@ -34,6 +34,10 @@ function MainPage() {
 		jQuery("#" + tabId).addClass("antMenuHighlight");
 		jQuery("#rightIframe").attr("src", modulePath);
 	};
+
+	me.refreshMenu = function() {
+		jQuery("#leftMenu #custom_menu").click();
+	};
 }
 
 jQuery(document).ready(function() {
@@ -44,4 +48,6 @@ jQuery(document).ready(function() {
 	// bind events
 	mainPage.attachEvents();
 
+	// refresh(hide/show) tabs
+	mainPage.refreshMenu();
 });

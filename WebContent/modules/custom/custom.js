@@ -132,9 +132,7 @@ function Custom() {
 							width : "340",
 							buttons : [ {
 								text : "保存",
-								click : function() {
-									jQuery(this).dialog("close");
-								}
+								click : me.doCreateCustom
 							}, {
 								text : "取消",
 								click : function() {
@@ -146,9 +144,42 @@ function Custom() {
 				});
 	};
 
-	me.afterCreateCustom = function() {
-		// 刷新页面
+	me.doCreateCustom = function() {
+		var customObj = me.getCustomDetilForm();
+		customObj = JSON.stringify(customObj);
+		var params = "custom="+customObj;
+		
+		jQuery.ajax({
+			url : "modules/custom/create",
+			type : "post",
+			async : false,
+			data : params,
+			success : me.afterCreateCustom
+		});
+
+		alert(JSON.stringify(customObj));
 	};
+
+	me.afterCreateCustom = function(data) {
+		// 刷新页面
+		alert("after create customL:" + data);
+	};
+
+	me.getCustomDetilForm = function() {
+		var customObj = {};
+		customObj.custname = jQuery("#custName").val();
+		customObj.gender = jQuery("#gender").val();
+		customObj.age = jQuery("#age").val();
+		var birth = new Date();
+		birth.setFullYear(jQuery("#birthYear").val(), jQuery("#birthMonth")
+				.val(), jQuery("#birthDay").val());
+		customObj.birthday = birth.getTime();
+		customObj.phoneno = jQuery("#phoneNo").val();
+		customObj.address = jQuery("#address").val();
+		customObj.familydesc = jQuery("#familyDesc").val();
+		return customObj;
+	};
+
 }
 
 var deleteCustom = function(custId) {
