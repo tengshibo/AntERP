@@ -1,5 +1,6 @@
 package com.anterp.modules.custom;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -9,6 +10,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.RowBounds;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -67,7 +70,13 @@ public class CustomController {
 	@RequestMapping("/create")
 	public String createCustom(@RequestParam("custom") String customStr, Model model) {
 		System.out.println(customStr);
-		Custom custom = JsonUtil.getObject(Custom.class, customStr);
+		Custom custom = null;
+		try {
+			custom = JsonUtil.getObject(Custom.class, customStr);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		System.out.println(custom.getCustname());
 		
