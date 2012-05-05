@@ -19,7 +19,8 @@
 <script type="text/javascript" src="modules/init/main.js"></script>
 </head>
 <body style="height: 100%">
-	<div id="topDiv">欢迎使用AntERP 系统</div>
+	<form id="logoutForm" name="logoutForm" style="display: none;" action="" method="post"></form>
+	<div id="topDiv">欢迎使用AntERP 系统<div id="logOutDiv">您好，<label id="loginedAccName"></label> [退出]</div></div>
 	<div id="downWrapperDiv">
 		<div id="leftMenu">
 			<div id="custom_menu" class="antMenu antMenuHighlight">客户资料</div>

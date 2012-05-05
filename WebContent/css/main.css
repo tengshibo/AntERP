@@ -1,6 +1,6 @@
 html {
 	overflow: auto;
-/* 	min-width: 1000px;
+	/* 	min-width: 1000px;
 	min-height: 600px; */
 }
 
@@ -42,4 +42,11 @@ html {
 
 .antMenuHighlight {
 	background-color: orange;
+}
+
+/**********/
+#logOutDiv {
+	float: right;
+	cursor: pointer;
+	margin: 10px;
 }

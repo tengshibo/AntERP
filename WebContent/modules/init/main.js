@@ -22,6 +22,16 @@ function MainPage() {
 		jQuery("#leftMenu .antMenu").each(function(index) {
 			jQuery(this).bind("click", me.highlightTab);
 		});
+
+		// 绑定LogOut事件
+		jQuery("#logOutDiv #loginedAccName").text(
+				window.accountInfoJson.empname);
+		jQuery("#logOutDiv").unbind().bind("click", me.doLogOut);
+	};
+
+	me.doLogOut = function() {
+		document.logoutForm.action = "door/out;jsessionid=" + window.jsessionid;
+		document.logoutForm.submit();
 	};
 
 	me.highlightTab = function() {
