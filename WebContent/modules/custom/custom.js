@@ -137,6 +137,7 @@ function Custom() {
 								text : "取消",
 								click : function() {
 									jQuery(this).dialog("close");
+									jQuery("#customDetailDialog").remove();
 								}
 							} ]
 						});
@@ -147,8 +148,7 @@ function Custom() {
 	me.doCreateCustom = function() {
 		var customObj = me.getCustomDetilForm();
 		customObj = JSON.stringify(customObj);
-		var params = "custom="+customObj;
-		
+		var params = "custom=" + customObj;
 		jQuery.ajax({
 			url : "modules/custom/create",
 			type : "post",
@@ -156,13 +156,22 @@ function Custom() {
 			data : params,
 			success : me.afterCreateCustom
 		});
-
-		alert(JSON.stringify(customObj));
+		// alert(JSON.stringify(customObj));
 	};
 
 	me.afterCreateCustom = function(data) {
-		// 刷新页面
-		alert("after create customL:" + data);
+		if (data.ok == false) {
+			alert(data.errorDesc);
+			return;
+		}
+		// refresh jqGrid
+		jQuery("#customDetailDialog").dialog("close");
+		jQuery("#customDetailDialog").remove();
+		jQuery("#customListTable").clearGridData();
+		jQuery("#customListTable").jqGrid("setGridParam", {
+			url : "modules/custom/getAll"
+		});
+		jQuery("#customListTable").trigger("reloadGrid");
 	};
 
 	me.getCustomDetilForm = function() {

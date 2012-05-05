@@ -1,25 +1,15 @@
 package com.anterp.modules.custom;
 
-import java.io.IOException;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.session.RowBounds;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,11 +18,14 @@ import com.anterp.modules.Pagers;
 import com.anterp.mybatis.domain.Custom;
 import com.anterp.mybatis.domain.CustomExample;
 import com.anterp.mybatis.mapper.CustomMapper;
+import com.anterp.tool.DateUtil;
 import com.anterp.tool.JsonUtil;
 
 @Controller
 @RequestMapping("/modules/custom")
 public class CustomController {
+
+	private Logger logger = Logger.getLogger(CustomController.class);
 
 	@Autowired
 	private CustomMapper customMapper;
@@ -50,6 +43,8 @@ public class CustomController {
 		// 分页参数
 		RowBounds rowBounds = new RowBounds(Pagers.getOffset(page, rows), rows);
 		int totalNumber = customMapper.countByExample(example);
+
+		example.setOrderByClause("lastmodifytime");
 		@SuppressWarnings("unchecked")
 		List<Custom> customs = (List<Custom>) sqlSessionTemplate.selectList(
 				"com.anterp.mybatis.mapper.CustomMapper.selectByExample",
@@ -64,36 +59,30 @@ public class CustomController {
 		// System.out.println(customs.size());
 		return Controllers.JsonViewName;
 	}
-	
-	
 
 	@RequestMapping("/create")
-	public String createCustom(@RequestParam("custom") String customStr, Model model) {
-		System.out.println(customStr);
-		Custom custom = null;
+	public String createCustom(@RequestParam("custom") String customStr,
+			Model model) {
 		try {
+			Timestamp now = DateUtil.getCurrentTime();
+			Custom custom = null;
 			custom = JsonUtil.getObject(Custom.class, customStr);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			custom.setCreatetime(now);
+			custom.setLastmodifytime(now);
+			this.customMapper.insert(custom);
+			Controllers.setSuccess(model);
+		} catch (Throwable e) {
+			logger.error("Create custom error", e);
+			Controllers.setError(model, "002", "Create custom error.");
 		}
-		
-		System.out.println(custom.getCustname());
-		
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-//		custom.setCreatetime(now);
-//		custom.setLastmodifytime(now);
-		// this.customMapper.insert(custom);
 		return Controllers.JsonViewName;
 	}
-	
+
 	@RequestMapping("/update")
 	public String updateCustom(Custom custom, Model model) {
-		System.out.println(custom.getCustname());
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		custom.setCreatetime(now);
-		custom.setLastmodifytime(now);
-		//this.customMapper.updateByPrimaryKey(custom);
+		System.out.println(custom.getCustid() + ":" + custom.getCustname());
+		custom.setLastmodifytime(DateUtil.getCurrentTime());
+		// this.customMapper.updateByPrimaryKey(custom);
 		return Controllers.JsonViewName;
 	}
 

@@ -11,7 +11,6 @@ public class JsonUtil {
 	public static <T> T getObject(Class<T> clazz, String json)
 			throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
-		// return objectMapper.convertValue(json, clazz);
 		return objectMapper.readValue(json, clazz);
 
 	}
