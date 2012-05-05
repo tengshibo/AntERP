@@ -121,6 +121,20 @@ function Custom() {
 		jQuery("#familyDesc").val(customObj.familydesc);
 	};
 
+	me.doUpdateCustom = function() {
+		var customObj = me.getCustomDetilForm();
+		customObj = JSON.stringify(customObj);
+		var params = "custom=" + customObj;
+		jQuery.ajax({
+			url : "modules/custom/update",
+			type : "post",
+			async : false,
+			data : params,
+			dataType : "json",
+			success : me.afterSaveCustom
+		});
+	};
+
 	me.showCustomDetail = function(custId, rowId) {
 		// 高亮这一行
 		jQuery("#customListTable").jqGrid('setSelection', rowId);
@@ -206,12 +220,12 @@ function Custom() {
 			async : false,
 			data : params,
 			dataType : "json",
-			success : me.afterCreateCustom
+			success : me.afterSaveCustom
 		});
 		// alert(JSON.stringify(customObj));
 	};
 
-	me.afterCreateCustom = function(data) {
+	me.afterSaveCustom = function(data) {
 		if (data.ok == false) {
 			alert(data.errorDesc);
 			return;
@@ -228,6 +242,11 @@ function Custom() {
 
 	me.getCustomDetilForm = function() {
 		var customObj = {};
+		// 更新客户时，客户ID大于零， 新建的时候，默认是零
+		var custId = jQuery("#custId").val();
+		if (custId > 0) {
+			customObj.custid = custId;
+		}
 		customObj.custname = jQuery("#custName").val();
 		customObj.gender = jQuery("#gender").val();
 		customObj.age = jQuery("#age").val();

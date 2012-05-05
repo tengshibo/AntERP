@@ -44,7 +44,7 @@ public class CustomController {
 		RowBounds rowBounds = new RowBounds(Pagers.getOffset(page, rows), rows);
 		int totalNumber = customMapper.countByExample(example);
 
-		example.setOrderByClause("lastmodifytime");
+		example.setOrderByClause("lastmodifytime DESC");
 		@SuppressWarnings("unchecked")
 		List<Custom> customs = (List<Custom>) sqlSessionTemplate.selectList(
 				"com.anterp.mybatis.mapper.CustomMapper.selectByExample",
