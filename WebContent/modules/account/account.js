@@ -5,7 +5,7 @@ function Account() {
 			url :"modules/account/getAll",
 			datatype : "json",
 			mtype : "post",
-			height: "100%",
+			height: "280px",
 			autowidth:true,
 			caption: "",
 			colNames : [ "账户ID","员工姓名","员工账户","账户状态", "年龄", "性别","移动电话","紧急联系电话","地址","创建日期","最后修改日期","操作" ],
@@ -122,7 +122,9 @@ function Account() {
 	
 	//保存账户信息
 	me.saveAccount =function(){
-		
+		//check
+		if(!checksubmit(document.forms[0]))
+			return false;
 		var account ={};
 		  account.accid= jQuery("#accountDetailDiv #accid").val(); 
 		  account.empname=jQuery("#accountDetailDiv #empName").val();
@@ -153,7 +155,7 @@ function Account() {
 						return;
 					} else {
 						jQuery(this).dialog("close");
-						//jQuery("#accountDetailDialog").remove();
+						jQuery("#accountDetailDialog").remove();
 						jQuery("#accountListTable").clearGridData();
 						jQuery("#accountListTable").jqGrid("setGridParam", {
 							url : "modules/account/getAll"
@@ -217,8 +219,8 @@ var createAccount =function(rowid){
 var getStatus = function(key){
 	
  switch(key){
-	case 0: {return "正常";	}
-	case 1:{ return "冻结";	}
+	case 0:  {return "正常";	}
+	case 1:  { return "冻结";}
 	default: {return key;   }
   }
 };

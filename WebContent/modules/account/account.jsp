@@ -20,6 +20,7 @@
 <script src="widget/jqGrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
 <script src="widget/jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
 <script src="modules/account/account.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/validatebox.js"></script>
 </head>
 <body>
   <div id="searchConditionDiv" >

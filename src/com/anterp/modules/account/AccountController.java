@@ -42,9 +42,11 @@ public class AccountController {
 			Model model) {
 		try{
 		AccountExample example = new AccountExample();
+		example.setOrderByClause("lastmodifytime DESC");
 		if(accountStr!=null){
 		Account account = JsonUtil.getObject(Account.class, accountStr);		
 		Criteria createCriteria = example.createCriteria();
+		
 		if(account.getAccname()!=null&&!"".equals(account.getAccname()))
 			    createCriteria.andAccnameLike("%"+account.getAccname()+"%");
 		if(account.getEmpname()!=null&&!"".equals(account.getEmpname()))

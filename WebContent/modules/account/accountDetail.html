@@ -1,15 +1,16 @@
+<form name="frm" id="frm">
 <div id="accountDetailDiv">
 	<div class="divTr">
 		<label class="divTdLeft">员工姓名:</label>
-		<div class="divTd divTdRight">
+		<div class="divTd divTdRight">	    
 		    <input  type="hidden" id="accid" type="text" value="-1">
-			<input  id="empName" type="text" >
+			<input  id="empName" type="text" class="required" >
 		</div>
 	</div>
 	<div class="divTr">
 		<label class="divTdLeft">员工账户:</label>
 		<div class="divTd divTdRight">
-			<input  id="accname" type="text" >
+			<input  id="accname" type="text" class="required" >
 		</div>
 	</div>
 	<div class="divTr">
@@ -24,7 +25,7 @@
 	<div class="divTr">
 		<label class="divTdLeft">年龄:</label>
 		<div class="divTd divTdRight">
-			<input id="age" type="text" >
+			<input id="age" type="text" class="for0_9 isLengthOf"  v_maxlength="3">
 		</div>
 	</div>
 	<div class="divTr">
@@ -39,23 +40,24 @@
 		<div class="divTr">
 		<label class="divTdLeft">移动电话:</label>
 		<div class="divTd divTdRight">
-			<input id="phoneNo" type="text" >
+			<input id="phoneNo" type="text" class="allCellPhone" >
 		</div>
 	</div>
 	<div class="divTr">
 		<label class="divTdLeft">紧急联系电话:</label>
 		<div class="divTd divTdRight">
-			<input id="urgentPhone" type="text" >
+			<input id="urgentPhone" type="text" class="andCellphone">
 		</div>
 	</div>
 	
 	<div class="divTr">
 		<label class="divTdLeft">地址:</label>
 		<div class="divTd">
-			<textarea id="address" rows="2" cols="35"></textarea>
+			<textarea id="address" rows="2" cols="35" class="isLengthOf" v_maxlength="512"></textarea>
+			
 		</div>
 	</div>
 </div>
-
+</form>
 
 
