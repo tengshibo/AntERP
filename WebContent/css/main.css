@@ -37,11 +37,15 @@ html {
 
 /******************************************/
 .antMenu {
+	padding-left: 60px;
+	margin-top: 10px;
+	cursor: pointer;
 	margin-top: 10px;
 }
 
 .antMenuHighlight {
 	background-color: orange;
+	/* border: 1px solid; */
 }
 
 /**********/

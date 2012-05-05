@@ -24,7 +24,7 @@ function Custom() {
 				+ rawObject.custid + ',' + options.rowId + ')">';
 
 		var deleteBtn = '<input type="button" value="删除" onclick="deleteCustom('
-				+ rawObject.custid + ')">';
+				+ rawObject.custid + ',' + options.rowId + ')">';
 
 		return "&nbsp;&nbsp;&nbsp;\t" + detail + "&nbsp;&nbsp;&nbsp;\t"
 				+ deleteBtn;
@@ -101,18 +101,22 @@ function Custom() {
 		jQuery("#createCustom").unbind("click").bind("click", me.createCustom);
 	};
 
-	me.deleteCustom = function(custId) {
+	me.deleteCustom = function(custId, rowId) {
 		// alert("delete custom:" + custId);
-		var params = {};
-		params.custId = custId;
-		jQuery.ajax({
-			url : "modules/custom/delete",
-			type : "post",
-			async : false,
-			data : params,
-			dataType : "json",
-			success : me.refreshCustomTable
-		});
+		jQuery("#customListTable").jqGrid('setSelection', rowId);
+		var doDel = window.confirm("确定删除该顾客资料吗？");
+		if (doDel == true) {
+			var params = {};
+			params.custId = custId;
+			jQuery.ajax({
+				url : "modules/custom/delete",
+				type : "post",
+				async : false,
+				data : params,
+				dataType : "json",
+				success : me.refreshCustomTable
+			});
+		}
 	};
 
 	me.renderCustomDetail = function(customObj) {
@@ -272,8 +276,8 @@ function Custom() {
 
 }
 
-var deleteCustom = function(custId) {
-	new Custom().deleteCustom(custId);
+var deleteCustom = function(custId, rowId) {
+	new Custom().deleteCustom(custId, rowId);
 };
 
 var showCustomDetail = function(custId, rowId) {
