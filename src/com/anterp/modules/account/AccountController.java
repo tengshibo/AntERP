@@ -3,6 +3,7 @@ package com.anterp.modules.account;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
+import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,14 +16,17 @@ import com.anterp.modules.Controllers;
 import com.anterp.modules.Pagers;
 import com.anterp.mybatis.domain.Account;
 import com.anterp.mybatis.domain.AccountExample;
+import com.anterp.mybatis.domain.AccountExample.Criteria;
 import com.anterp.mybatis.domain.Custom;
 import com.anterp.mybatis.mapper.AccountMapper;
 import com.anterp.tool.DateUtil;
+import com.anterp.tool.JsonUtil;
 
 @Controller
 @RequestMapping("/modules/account")
 public class AccountController {
 	
+	private Logger logger = Logger.getLogger(AccountController.class);
 	
 	@Autowired
 	private AccountMapper accountMapper;
@@ -33,10 +37,21 @@ public class AccountController {
 
 	@RequestMapping("/getAll")
 	public String getAllAccount(@RequestParam("page") int page,
-			@RequestParam("rows") int rows, Model model) {
+			@RequestParam("rows") int rows,
+			@RequestParam(value="account",required=false) String accountStr, 
+			Model model) {
+		try{
 		AccountExample example = new AccountExample();
-		example.createCriteria().andAccnameLike("%Ant%");
-		// 分页参数
+		if(accountStr!=null){
+		Account account = JsonUtil.getObject(Account.class, accountStr);		
+		Criteria createCriteria = example.createCriteria();
+		if(account.getAccname()!=null&&!"".equals(account.getAccname()))
+			    createCriteria.andAccnameLike("%"+account.getAccname()+"%");
+		if(account.getEmpname()!=null&&!"".equals(account.getEmpname()))
+		    createCriteria.andEmpnameLike("%"+account.getEmpname()+"%");
+		if(account.getPhoneno()!=null&&!"".equals(account.getPhoneno()))
+		     createCriteria.andPhonenoLike("%"+account.getPhoneno()+"%");
+		}
 		// 分页参数
 		RowBounds rowBounds = new RowBounds(Pagers.getOffset(page, rows), rows);
 		int totalNumber = accountMapper.countByExample(example);
@@ -49,7 +64,11 @@ public class AccountController {
 		model.addAttribute("page", page);
 		model.addAttribute("total", Pagers.getTotalPage(totalNumber, rows));
 		model.addAttribute("records", totalNumber);
-		
+		}catch(Exception e){
+			 e.printStackTrace();
+			 logger.debug("查询失败!");
+			 Controllers.setError(model, "002", "查询失败!");	
+		}
 		return Controllers.JsonViewName;
 	}
 	
@@ -59,12 +78,38 @@ public class AccountController {
 		accountMapper.deleteByPrimaryKey(accountId);
 	}
 	
-	@RequestMapping("/updateAccount")
-	public String updateAccount(Account account, Model model){
-		
+	
+	@RequestMapping("/addAccount")
+	public String addAccount(@RequestParam("account") String accountStr,Model model){
+		try{
+		Account account = JsonUtil.getObject(Account.class, accountStr);
+		account.setCreatetime(DateUtil.getCurrentTime());
 		account.setLastmodifytime(DateUtil.getCurrentTime());
-		accountMapper.updateByPrimaryKey(account);
+		account.setAccpwd("123456");
+		accountMapper.insert(account);
+		Controllers.setSuccess(model);
+		}catch(Exception e){
+		 e.printStackTrace();
+		 logger.debug("添加账户失败!");
+		 Controllers.setError(model, "002", "添加账户失败!");
+		}
 		
+		return Controllers.JsonViewName;
+	}
+	
+	
+	@RequestMapping("/updateAccount")
+	public String updateAccount(@RequestParam("account") String accountStr, Model model){
+		try{	
+		Account account = JsonUtil.getObject(Account.class, accountStr);
+		account.setLastmodifytime(DateUtil.getCurrentTime());
+		//accountMapper.updateByPrimaryKey(account);
+		accountMapper.updateByPrimaryKeySelective(account);
+		}catch(Exception e){
+			 e.printStackTrace();
+			 logger.debug("添加账户失败!");
+			 Controllers.setError(model, "002", "修改账户失败!");
+		}
 		return Controllers.JsonViewName;
 	}
 	

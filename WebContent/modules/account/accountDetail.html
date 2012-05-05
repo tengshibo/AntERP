@@ -1,32 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@include file="/modules/common/CommonHead.jsp"%>
-
-<% String accId =request.getParameter("accId"); %>
-
-<div id="customDetailDiv">
+<div id="accountDetailDiv">
 	<div class="divTr">
 		<label class="divTdLeft">员工姓名:</label>
 		<div class="divTd divTdRight">
-			<input id="empName" type="text">
+		    <input  type="hidden" id="accid" type="text" value="-1">
+			<input  id="empName" type="text" >
 		</div>
 	</div>
 	<div class="divTr">
 		<label class="divTdLeft">员工账户:</label>
 		<div class="divTd divTdRight">
-			<input id="accname" type="text" value="<%=accId %>">
+			<input  id="accname" type="text" >
 		</div>
 	</div>
 	<div class="divTr">
 		<label class="divTdLeft">账户状态:</label>
 		<div class="divTd divTdRight">
-			<input id="status" type="text">
+			<select id="status">
+				<option value="0">正常</option>
+				<option value="1">冻结</option>
+			</select>
 		</div>
 	</div>
 	<div class="divTr">
 		<label class="divTdLeft">年龄:</label>
 		<div class="divTd divTdRight">
-			<input id="age" type="text" size="1">
+			<input id="age" type="text" >
 		</div>
 	</div>
 	<div class="divTr">
@@ -41,13 +39,13 @@
 		<div class="divTr">
 		<label class="divTdLeft">移动电话:</label>
 		<div class="divTd divTdRight">
-			<input id="phoneNo" type="text" size="1">
+			<input id="phoneNo" type="text" >
 		</div>
 	</div>
 	<div class="divTr">
 		<label class="divTdLeft">紧急联系电话:</label>
 		<div class="divTd divTdRight">
-			<input id="urgentPhone" type="text" size="1">
+			<input id="urgentPhone" type="text" >
 		</div>
 	</div>
 	
@@ -58,3 +56,6 @@
 		</div>
 	</div>
 </div>
+
+
+

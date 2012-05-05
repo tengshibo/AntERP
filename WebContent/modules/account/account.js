@@ -2,7 +2,7 @@ function Account() {
 	var me = this;
 	me.showAccountInfo = function() {
 		jQuery("#accountListTable").jqGrid({
-			url : "modules/account/getAll",
+			url :"modules/account/getAll",
 			datatype : "json",
 			mtype : "post",
 			height: "100%",
@@ -17,10 +17,10 @@ function Account() {
 			    {name : "age"}, 
 			    {name : "gender"},
 			    {name : "phoneno"},
-			    {name : "urgentPhone",hidden:true},
+			    {name : "urgentphone",hidden:true},
 			    {name : "address",hidden:true},
-			    {name : "createTime",hidden:true},
-			    {name : "lastModifyTime",hidden:true},
+			    {name : "createtime",hidden:true},
+			    {name : "lastmodifytime",hidden:true},
 			    {name : "act"}
 			    ],
 			  //用于解析server传过来的数据
@@ -49,9 +49,10 @@ function Account() {
 				
 				afterInsertRow:function(id,rd,data){
 					jQuery("#accountListTable").jqGrid("setRowData",id,
-					    {						
-						act:"&nbsp;&nbsp;&nbsp;<input type='button' class='b_foot' value='详情' onclick='createAccount("+id+")'></input>"+
-							"&nbsp;&nbsp;&nbsp;<input type='button' class='b_foot' value='删除' onclick='delAccountById("+data.accid+")'></input>"
+					    {	
+						status:getStatus(data.status),
+						act:"&nbsp;&nbsp;&nbsp;<input type='button'  value='详情' onclick='createAccount("+id+")'></input>"+
+							"&nbsp;&nbsp;&nbsp;<input type='button'  value='删除' onclick='delAccountById("+data.accid+")'></input>"
 					    }
 						);
 					
@@ -87,14 +88,11 @@ function Account() {
 		
 	};
     //新建账户
-	me.createAccount =function(obj){
-		var params = {
-				accId : obj.accid
-			};
+	me.createAccount =function(){
 		jQuery.ajax({
-			url : "modules/account/accountDetail.jsp",
+			url : "modules/account/accountDetail.html",
 			type : "post",
-			data : params,
+			async : false,
 			success : function(data) {
 				var content = '<div id="accountDetailDialog">'+data +"</div>";
 				jQuery(content).dialog({
@@ -103,12 +101,13 @@ function Account() {
 					resizable : false,
 					height : "auto",
 					width : "340",
+					close : function(){
+						jQuery("#accountDetailDialog").remove();
+					},
 					buttons : [ 
 					{
 						text : "保存",
-						click : function() {
-							jQuery(this).dialog("close");
-						}
+						click : me.saveAccount
 					}, 
 					{
 						text : "取消",
@@ -118,17 +117,81 @@ function Account() {
 					} ]
 				});
 			}
-		});
-		
-		
+		});	
 	};
 	
-	
+	//保存账户信息
+	me.saveAccount =function(){
+		
+		var account ={};
+		  account.accid= jQuery("#accountDetailDiv #accid").val(); 
+		  account.empname=jQuery("#accountDetailDiv #empName").val();
+		  account.accname=jQuery("#accountDetailDiv #accname").val();
+		  account.status=jQuery("#accountDetailDiv #status").val();
+		  account.age= jQuery("#accountDetailDiv #age").val();
+		  account.gender=jQuery("#accountDetailDiv #gender").val();
+		  account.phoneno=jQuery("#accountDetailDiv #phoneNo").val();
+		  account.urgentphone=jQuery("#accountDetailDiv #urgentPhone").val();
+		  account.address=jQuery("#accountDetailDiv #address").val();
+
+		  var params = "account="+JSON.stringify(account);
+		  
+	      var url ="modules/account/updateAccount";
+		  if(account.accid=="-1"){
+			  account.accid="";
+			  url="modules/account/addAccount"; 
+		   }
+
+		  jQuery.ajax({
+				url : url,
+				type : "post",
+				data : params,
+				dataType : "json",
+				success : function(data) {
+					if (data.ok == false) {
+						alert(data.errorDesc);
+						return;
+					} else {
+						jQuery(this).dialog("close");
+						//jQuery("#accountDetailDialog").remove();
+						jQuery("#accountListTable").clearGridData();
+						jQuery("#accountListTable").jqGrid("setGridParam", {
+							url : "modules/account/getAll"
+						});
+						jQuery("#accountListTable").trigger("reloadGrid");
+					}
+				}
+			});		  
+	};
+	//查询
+	me.search = function(){
+	  
+	  var account ={};
+	   account.empname=jQuery("#serEmpName").val();
+	   account.accname=jQuery("#serAccName").val();   	
+	   account.accname=jQuery("#serPhoneNo").val();
+	   
+	   var params ={
+			account:JSON.stringify(account)		
+	   };
+	   
+	   $("#accountListTable").clearGridData();
+	   jQuery("#accountListTable").jqGrid("setGridParam", {
+			url : "modules/account/getAll"
+		});
+	   $("#accountListTable").jqGrid("setGridParam",{postData:params});
+	   $("#accountListTable").trigger("reloadGrid");
+	};
 	
 }
 //默认查询显示账户信息.
 jQuery(document).ready(function() {
-	new Account().showAccountInfo();
+	var acc = new Account();
+	acc.showAccountInfo();
+	//新建按钮绑定事件.
+	jQuery("#createAccount").unbind().bind("click", acc.createAccount);
+	//查询按钮绑定时间
+	jQuery("#qryBt").unbind().bind("click", acc.search);
 });
 //删除账户.
 var delAccountById =function(accountId){
@@ -136,10 +199,29 @@ var delAccountById =function(accountId){
 };
 //查看账户详细.
 var createAccount =function(rowid){
-	var data = jQuery("#accountListTable").jqGrid("getRowData",rowid);
-	new Account().createAccount(data);	
+	var data = jQuery("#accountListTable").jqGrid("getRowData",rowid);	
+	new Account().createAccount();	
+	jQuery("#accountDetailDiv #accid").val(data.accid);
+	jQuery("#accountDetailDiv #empName").val(data.empname);
+	jQuery("#accountDetailDiv #accname").val(data.accname);
+	jQuery("#accountDetailDiv #status").val(data.status);
+	jQuery("#accountDetailDiv #age").val(data.age);
+	jQuery("#accountDetailDiv #gender").val(data.gender);
+	jQuery("#accountDetailDiv #phoneNo").val(data.phoneno);
+	jQuery("#accountDetailDiv #urgentPhone").val(data.urgentphone);
+	jQuery("#accountDetailDiv #address").val(data.address);
+	jQuery("#accountDetailDiv #").val(data.address);
 };
 
+//获取账户状态.
+var getStatus = function(key){
+	
+ switch(key){
+	case 0: {return "正常";	}
+	case 1:{ return "冻结";	}
+	default: {return key;   }
+  }
+};
 
 
 

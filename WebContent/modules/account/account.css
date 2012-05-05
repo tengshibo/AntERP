@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+
+#searchConditionDiv {
+	width: 900px;
+	height: 50px;
+}
+
+#accountDetailDiv {
+	width: 300px;
+}
+
+.input {
+	height: 15px;
+	margin: 0px 2px 0px 0px;
+	padding: 0;
+	font-size: 12px;
+	line-height:1em;
+}
+
+
+
+.b_text {
+	background: url(../../images/newBtn.gif) no-repeat 0px -113px;
+	width: 56px;
+	height: 22px;
+	border:solid 1px #aaa;
+	margin-right: 10px;
+	line-height: 24px; 
+	cursor: pointer;
+}
+
+
+.divTr {
+	margin-top: 20px;
+}
+
+.divTdLeft {
+	text-align: right;
+}
+
+.divTdRight {
+	float: right;
+	width: 180px;
+}
+
+/* #birthYear {
+	width: 50px;
+} */
+
+/* #birthMonth {
+	width: 30px;
+}
+
+#birthDay {
+	width: 30px;
+} */
