@@ -88,21 +88,31 @@ function Custom() {
 	me.showAllCustom = function() {
 		jQuery("#customListTable").jqGrid(jqGridOptin);
 		jQuery("#customListTable").navGrid('#customListPager', {
-			edit : true,
-			add : true,
-			del : true,
-			search : true
+			edit : false,
+			add : false,
+			del : false,
+			search : false
 		});
 		// jQuery("#customListTable").closest(".ui-jqgrid-bdiv").css({
 		// 'overflow-x' : 'hidden' });
 	};
 
 	me.attachEvents = function() {
-		jQuery("#createCustom").bind("click", me.createCustom);
+		jQuery("#createCustom").unbind("click").bind("click", me.createCustom);
 	};
 
 	me.deleteCustom = function(custId) {
-		alert("delete custom:" + custId);
+		// alert("delete custom:" + custId);
+		var params = {};
+		params.custId = custId;
+		jQuery.ajax({
+			url : "modules/custom/delete",
+			type : "post",
+			async : false,
+			data : params,
+			dataType : "json",
+			success : me.refreshCustomTable
+		});
 	};
 
 	me.renderCustomDetail = function(customObj) {
@@ -131,7 +141,7 @@ function Custom() {
 			async : false,
 			data : params,
 			dataType : "json",
-			success : me.afterSaveCustom
+			success : me.refreshCustomTable
 		});
 	};
 
@@ -220,12 +230,12 @@ function Custom() {
 			async : false,
 			data : params,
 			dataType : "json",
-			success : me.afterSaveCustom
+			success : me.refreshCustomTable
 		});
 		// alert(JSON.stringify(customObj));
 	};
 
-	me.afterSaveCustom = function(data) {
+	me.refreshCustomTable = function(data) {
 		if (data.ok == false) {
 			alert(data.errorDesc);
 			return;

@@ -96,8 +96,14 @@ public class CustomController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteCustom(@RequestParam("custId") int custId) {
-		this.customMapper.deleteByPrimaryKey(custId);
+	public String deleteCustom(@RequestParam("custId") int custId, Model model) {
+		try {
+			this.customMapper.deleteByPrimaryKey(custId);
+			Controllers.setSuccess(model);
+		} catch (Throwable t) {
+			logger.error("Delete custom error", t);
+			Controllers.setError(model, "custom.003", "Delete custom error.");
+		}
 		return Controllers.JsonViewName;
 	}
 }
