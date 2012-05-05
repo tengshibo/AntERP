@@ -1,5 +1,21 @@
 @CHARSET "UTF-8";
 
+#customFuncDiv {
+	width: 300px;
+}
+
+#createCustomDiv {
+	float: left;
+}
+
+#searchCustomZone {
+	
+}
+
+.searchNameDiv {
+	
+}
+
 #customDetailDiv {
 	width: 300px;
 }

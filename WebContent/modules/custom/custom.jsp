@@ -26,7 +26,12 @@
 </head>
 <body>
 	<div id="customFuncDiv">
-		<input id="createCustom" type="button" value="新建客户"/>
+		<div id="createCustomDiv"><input id="createCustom" type="button" value="新建客户"/></div>
+		<div id="searchCustomZone">
+			<div id="searchCustomDiv"><input id="searchCustomBtn" type="button" value="搜索"/></div>
+			<div class="searchNameDiv">姓名:<input type="text" id="searchName"></div>
+			<div class="searchPhoneNumDiv">电话:<input type="text" id="searchPhoneNum"></div>
+		</div>
 	</div>
 	<table id="customListTable"><tr><td/></tr></table>
 	<div id="customListPager"></div>

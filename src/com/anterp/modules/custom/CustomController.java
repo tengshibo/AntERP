@@ -35,10 +35,25 @@ public class CustomController {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@RequestMapping("/getAll")
-	public String getAllCustom(@RequestParam("page") int page,
-			@RequestParam("rows") int rows, Model model) {
+	public String getAllCustom(
+			@RequestParam("page") int page,
+			@RequestParam("rows") int rows,
+			@RequestParam(value = "searchName", required = false) String searchName,
+			@RequestParam(value = "searchPhone", required = false) String searchPhone,
+			Model model) {
+
+		System.out.println(searchName + "," + searchPhone);
+
 		// 查询条件
 		CustomExample example = new CustomExample();
+		if (searchName != null) {
+			example.createCriteria().andCustnameLikeInsensitive(
+					"%" + searchName + "%");
+		}
+		if (searchPhone != null) {
+			example.createCriteria().andPhonenoLikeInsensitive(
+					"%" + searchPhone + "%");
+		}
 		customMapper.selectByExample(example);
 		// 分页参数
 		RowBounds rowBounds = new RowBounds(Pagers.getOffset(page, rows), rows);

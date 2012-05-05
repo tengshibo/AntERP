@@ -97,8 +97,25 @@ function Custom() {
 		// 'overflow-x' : 'hidden' });
 	};
 
+	me.searchCustom = function() {
+		var params = {};
+		params.searchName = jQuery("#searchName").val();
+		params.searchPhone = jQuery("#searchPhoneNum").val();
+
+		jQuery("#customListTable").clearGridData();
+		jQuery("#customListTable").jqGrid("setGridParam", {
+			postData : params
+		});
+		jQuery("#customListTable").jqGrid("setGridParam", {
+			url : "modules/custom/getAll"
+		});
+		jQuery("#customListTable").trigger("reloadGrid");
+	};
+
 	me.attachEvents = function() {
 		jQuery("#createCustom").unbind("click").bind("click", me.createCustom);
+		jQuery("#searchCustomBtn").unbind("click").bind("click",
+				me.searchCustom);
 	};
 
 	me.deleteCustom = function(custId, rowId) {
