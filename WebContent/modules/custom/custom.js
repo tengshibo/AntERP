@@ -105,14 +105,62 @@ function Custom() {
 		alert("delete custom:" + custId);
 	};
 
+	me.renderCustomDetail = function(customObj) {
+		jQuery("#custId").val(customObj.custid);
+		jQuery("#custName").val(customObj.custname);
+		jQuery("#gender").val(customObj.gender);
+		jQuery("#age").val(customObj.age);
+		var birth = new Date();
+		birth.setTime(customObj.birthday);
+		jQuery("#birthYear").val(birth.getFullYear());
+		jQuery("#birthMonth").val(birth.getMonth());
+		jQuery("#birthDay").val(birth.getDay());
+
+		jQuery("#phoneNo").val(customObj.phoneno);
+		jQuery("#address").val(customObj.address);
+		jQuery("#familyDesc").val(customObj.familydesc);
+	};
+
 	me.showCustomDetail = function(custId, rowId) {
 		// 高亮这一行
 		jQuery("#customListTable").jqGrid('setSelection', rowId);
-		// 取出这行对应Custom对象
+		// 按照rowId取出这行对应Custom对象
 		var userData = jQuery("#customListTable").jqGrid("getGridParam",
 				"userData");
-		var current = userData[rowId];
-		alert("showCustomDetail:" + JSON.stringify(current));
+		var rowCustom = userData[rowId - 1];
+
+		jQuery
+				.ajax({
+					url : "modules/custom/customDetail.html",
+					type : "post",
+					success : function(data) {
+						var content = '<div id="customDetailDialog">' + data
+								+ "</div>";
+						jQuery(content).dialog({
+							title : "客户信息",
+							modal : true,
+							resizable : false,
+							height : "auto",
+							width : "340",
+							open : function() {
+								me.renderCustomDetail(rowCustom);
+							},
+							close : function() {
+								jQuery("#customDetailDialog").remove();
+							},
+							buttons : [ {
+								text : "保存",
+								click : me.doUpdateCustom
+							}, {
+								text : "取消",
+								click : function() {
+									jQuery(this).dialog("close");
+									jQuery("#customDetailDialog").remove();
+								}
+							} ]
+						});
+					}
+				});
 	};
 
 	// 新建客户资料
@@ -130,6 +178,9 @@ function Custom() {
 							resizable : false,
 							height : "auto",
 							width : "340",
+							close : function() {
+								jQuery("#customDetailDialog").remove();
+							},
 							buttons : [ {
 								text : "保存",
 								click : me.doCreateCustom
@@ -154,6 +205,7 @@ function Custom() {
 			type : "post",
 			async : false,
 			data : params,
+			dataType : "json",
 			success : me.afterCreateCustom
 		});
 		// alert(JSON.stringify(customObj));

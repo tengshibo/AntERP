@@ -73,16 +73,25 @@ public class CustomController {
 			Controllers.setSuccess(model);
 		} catch (Throwable e) {
 			logger.error("Create custom error", e);
-			Controllers.setError(model, "002", "Create custom error.");
+			Controllers.setError(model, "custom.001", "Create custom error.");
 		}
 		return Controllers.JsonViewName;
 	}
 
 	@RequestMapping("/update")
-	public String updateCustom(Custom custom, Model model) {
-		System.out.println(custom.getCustid() + ":" + custom.getCustname());
-		custom.setLastmodifytime(DateUtil.getCurrentTime());
-		// this.customMapper.updateByPrimaryKey(custom);
+	public String updateCustom(@RequestParam("custom") String customStr,
+			Model model) {
+		try {
+			Timestamp now = DateUtil.getCurrentTime();
+			Custom custom = null;
+			custom = JsonUtil.getObject(Custom.class, customStr);
+			custom.setLastmodifytime(now);
+			this.customMapper.updateByPrimaryKey(custom);
+			Controllers.setSuccess(model);
+		} catch (Throwable e) {
+			logger.error("Update custom error", e);
+			Controllers.setError(model, "custom.002", "Update custom error.");
+		}
 		return Controllers.JsonViewName;
 	}
 
