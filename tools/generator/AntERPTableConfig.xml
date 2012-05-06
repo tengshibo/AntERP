@@ -33,7 +33,12 @@
 		<table tableName="tbl_acc_role" domainObjectName="AccountRole" />
 		<table tableName="tbl_custom" domainObjectName="Custom">
 			<generatedKey column="custId" sqlStatement="SELECT LAST_INSERT_ID()" />
+			<columnOverride column="birthday" javaType="java.sql.Date"></columnOverride>
 			<columnOverride column="createTime" javaType="java.sql.Timestamp"></columnOverride>
+			<columnOverride column="lastModifyTime" javaType="java.sql.Timestamp"></columnOverride>
+		</table>
+		<table tableName="tbl_custom_history" domainObjectName="CustomHistory">
+			<columnOverride column="birthday" javaType="java.sql.Date"></columnOverride>
 			<columnOverride column="lastModifyTime" javaType="java.sql.Timestamp"></columnOverride>
 		</table>
 		<table tableName="tbl_privilege" domainObjectName="Privilege" />
