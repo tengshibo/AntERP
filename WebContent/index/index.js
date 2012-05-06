@@ -1,5 +1,6 @@
 function Index() {
 	var me = this;
+	var changePwdDialogId = "changePwdDialog";
 
 	me.clickLoginButton = function() {
 		// check input .
@@ -57,6 +58,41 @@ function Index() {
 	};
 
 	me.changeAccountPwd = function() {
+		jQuery.ajax({
+			url : "index/changePwd.html",
+			type : "post",
+			success : function(data) {
+				var content = '<div id="' + changePwdDialogId + '">' + data
+						+ "</div>";
+				jQuery(content).dialog({
+					title : "修改密码",
+					modal : true,
+					resizable : false,
+					height : "auto",
+					width : "400",
+					open : function() {
+						jQuery("#mAccName").val(jQuery("#accName").val());
+					},
+					close : function() {
+						jQuery("#" + changePwdDialogId).remove();
+					},
+					buttons : [ {
+						text : "保存",
+						click : function() {
+							// TODO
+						}
+					}, {
+						text : "取消",
+						click : function() {
+							jQuery(this).dialog("close");
+						}
+					} ]
+				});
+			}
+		});
+	};
+
+	me.doChangePwd = function() {
 		
 	};
 }

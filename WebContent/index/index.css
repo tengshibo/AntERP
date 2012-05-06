@@ -27,4 +27,6 @@
 	margin-right: 95px;
 }
 
-/* main jsp */
+.changePwdFieldset {
+	width: 300px;
+}

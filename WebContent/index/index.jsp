@@ -7,9 +7,10 @@
 <base href="<%=basePath%>">
 <title>AntERP Login</title>
 <meta charset="UTF-8">
-
-<link rel="stylesheet" type="text/css" href="css/site.css">
+<link rel="stylesheet" type="text/css" href="widget/jgUI/css/ui-lightness/jquery-ui-1.8.20.custom.css" />
+<link rel="stylesheet" type="text/css" href="index/index.css">
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="widget/jgUI/js/jquery-ui-1.8.20.custom.js"></script>
 <script type="text/javascript" src="js/wresize.js"></script>
 <script type="text/javascript" src="index/index.js"></script>
 <script type="text/javascript" src="js/validatebox.js"></script>
