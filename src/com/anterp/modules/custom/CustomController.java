@@ -31,6 +31,9 @@ public class CustomController {
 	private CustomMapper customMapper;
 
 	@Autowired
+	private CustomService customService;
+
+	@Autowired
 	@Qualifier("anterpSqlSessionTemplate")
 	private SqlSessionTemplate sqlSessionTemplate;
 
@@ -79,12 +82,8 @@ public class CustomController {
 	public String createCustom(@RequestParam("custom") String customStr,
 			Model model) {
 		try {
-			Timestamp now = DateUtil.getCurrentTime();
-			Custom custom = null;
-			custom = JsonUtil.getObject(Custom.class, customStr);
-			custom.setCreatetime(now);
-			custom.setLastmodifytime(now);
-			this.customMapper.insert(custom);
+			Custom custom = JsonUtil.getObject(Custom.class, customStr);
+			this.customService.createCustom(custom);
 			Controllers.setSuccess(model);
 		} catch (Throwable e) {
 			logger.error("Create custom error", e);
@@ -97,11 +96,8 @@ public class CustomController {
 	public String updateCustom(@RequestParam("custom") String customStr,
 			Model model) {
 		try {
-			Timestamp now = DateUtil.getCurrentTime();
-			Custom custom = null;
-			custom = JsonUtil.getObject(Custom.class, customStr);
-			custom.setLastmodifytime(now);
-			this.customMapper.updateByPrimaryKey(custom);
+			Custom custom = JsonUtil.getObject(Custom.class, customStr);
+			this.customService.updateCustom(custom);
 			Controllers.setSuccess(model);
 		} catch (Throwable e) {
 			logger.error("Update custom error", e);

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.anterp.modules.Controllers;
+import com.anterp.modules.utils.ThreadLocalUtils;
+import com.anterp.mybatis.domain.Account;
 
 public class HttpFilter implements Filter {
 
@@ -28,10 +30,14 @@ public class HttpFilter implements Filter {
 		response.setCharacterEncoding("UTF-8");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-		if (httpRequest.getSession().getAttribute(Controllers.AccInfo) == null) {
+		Account account = (Account) (httpRequest.getSession()
+				.getAttribute(Controllers.AccInfo));
+		if (account == null) {
 			httpResponse.sendRedirect(httpRequest.getContextPath()
 					+ Controllers.IndexJSP);
 			return;
+		} else {
+			ThreadLocalUtils.setAccInfo(account);
 		}
 		chain.doFilter(request, response);
 	}
