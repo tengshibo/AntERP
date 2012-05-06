@@ -25,6 +25,7 @@ function Account() {
 			    ],
 			  //用于解析server传过来的数据
 				jsonReader :{
+					userdata : "rows",
 					root : "rows",// 所有数据项
 					page : "page",// 当前页数
 					total : "total",// 总页数
@@ -51,6 +52,7 @@ function Account() {
 					jQuery("#accountListTable").jqGrid("setRowData",id,
 					    {	
 						status:getStatus(data.status),
+						gender:getGender(data.gender),
 						act:"&nbsp;&nbsp;&nbsp;<input type='button'  value='详情' onclick='createAccount("+id+")'></input>"+
 							"&nbsp;&nbsp;&nbsp;<input type='button'  value='删除' onclick='delAccountById("+data.accid+")'></input>"
 					    }
@@ -65,6 +67,8 @@ function Account() {
 	//删除账户
 	me.delAccount =function(accountId){
 		
+		var doDel = window.confirm("确定删除该账户资料吗？");
+     if (doDel == true) {		
 		var params = {
 				accId : accountId
 			};
@@ -75,17 +79,16 @@ function Account() {
 			data : params,
 			dataType : "json",
 			success : function(data) {
-				$("#accountListTable").trigger("reloadGrid");
 				if (data.ok == false) {
 					alert(data.errorDesc);
 					return;
 				} else {
-					window.jsessionid = data.jsessionid;
-					me.doLogin();
+					alert("删除成功!");
+					refreshDate();
 				}
 			}
 		});
-		
+		}	
 	};
     //新建账户
 	me.createAccount =function(){
@@ -125,6 +128,7 @@ function Account() {
 		//check
 		if(!checksubmit(document.forms[0]))
 			return false;
+		//账户信息.
 		var account ={};
 		  account.accid= jQuery("#accountDetailDiv #accid").val(); 
 		  account.empname=jQuery("#accountDetailDiv #empName").val();
@@ -135,15 +139,21 @@ function Account() {
 		  account.phoneno=jQuery("#accountDetailDiv #phoneNo").val();
 		  account.urgentphone=jQuery("#accountDetailDiv #urgentPhone").val();
 		  account.address=jQuery("#accountDetailDiv #address").val();
+        //角色
+		var accRole ={};
+		  accRole.roleid=jQuery("#accountDetailDiv #roleid").val();
 
-		  var params = "account="+JSON.stringify(account);
-		  
 	      var url ="modules/account/updateAccount";
 		  if(account.accid=="-1"){
 			  account.accid="";
 			  url="modules/account/addAccount"; 
 		   }
 
+		  var params = {
+					 account:JSON.stringify(account),
+					 accrole:JSON.stringify(accRole)
+				  } ;
+		  
 		  jQuery.ajax({
 				url : url,
 				type : "post",
@@ -154,13 +164,15 @@ function Account() {
 						alert(data.errorDesc);
 						return;
 					} else {
+						alert
+						if(account.accid==""){
+							alert("添加账户成功!");
+						}else{
+							alert("修改账户成功!");
+						}
 						jQuery(this).dialog("close");
 						jQuery("#accountDetailDialog").remove();
-						jQuery("#accountListTable").clearGridData();
-						jQuery("#accountListTable").jqGrid("setGridParam", {
-							url : "modules/account/getAll"
-						});
-						jQuery("#accountListTable").trigger("reloadGrid");
+						refreshDate();
 					}
 				}
 			});		  
@@ -201,7 +213,12 @@ var delAccountById =function(accountId){
 };
 //查看账户详细.
 var createAccount =function(rowid){
-	var data = jQuery("#accountListTable").jqGrid("getRowData",rowid);	
+	// 高亮这一行
+	jQuery("#accountListTable").jqGrid('setSelection', rowid);
+	// 按照rowId取出这行对应Custom对象
+	var userData = jQuery("#accountListTable").jqGrid("getGridParam",
+			"userData");
+	var data = userData[rowid - 1];
 	new Account().createAccount();	
 	jQuery("#accountDetailDiv #accid").val(data.accid);
 	jQuery("#accountDetailDiv #empName").val(data.empname);
@@ -212,8 +229,21 @@ var createAccount =function(rowid){
 	jQuery("#accountDetailDiv #phoneNo").val(data.phoneno);
 	jQuery("#accountDetailDiv #urgentPhone").val(data.urgentphone);
 	jQuery("#accountDetailDiv #address").val(data.address);
-	jQuery("#accountDetailDiv #").val(data.address);
+	jQuery("#accountDetailDiv #roleid").val(data.roleid);
+	
 };
+//刷新查询结果.
+var refreshDate = function(){
+	
+	jQuery("#accountListTable").clearGridData();
+	jQuery("#accountListTable").jqGrid("setGridParam", {
+		url : "modules/account/getAll"
+	});
+	jQuery("#accountListTable").trigger("reloadGrid");
+	
+};
+
+
 
 //获取账户状态.
 var getStatus = function(key){
@@ -223,6 +253,15 @@ var getStatus = function(key){
 	case 1:  { return "冻结";}
 	default: {return key;   }
   }
+};
+
+var getGender =function(key){
+	switch(key){
+	case 0:  {return "男";	}
+	case 1:  { return "女";}
+	default: {return key;   }
+  }
+	
 };
 
 

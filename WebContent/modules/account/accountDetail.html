@@ -1,26 +1,26 @@
 <form name="frm" id="frm">
 <div id="accountDetailDiv">
 	<div class="divTr">
-		<label class="divTdLeft">员工姓名:</label>
+		<label class="divTdLeft">员工姓名:<span><font color="red">*</font></span></label>
 		<div class="divTd divTdRight">	    
 		    <input  type="hidden" id="accid" type="text" value="-1">
-			<input  id="empName" type="text" class="required" >
+			<input  id="empName" type="text" class="required" >			
 		</div>
 	</div>
 	<div class="divTr">
-		<label class="divTdLeft">员工账户:</label>
+		<label class="divTdLeft">员工账户:<span><font color="red">*</font></span></label>
 		<div class="divTd divTdRight">
 			<input  id="accname" type="text" class="required" >
-		</div>
+		</div>		
 	</div>
 	<div class="divTr">
-		<label class="divTdLeft">账户状态:</label>
+		<label class="divTdLeft">账户状态:<span><font color="red">*</font></span></label>
 		<div class="divTd divTdRight">
-			<select id="status">
+			<select id="status" class="required">
 				<option value="0">正常</option>
 				<option value="1">冻结</option>
 			</select>
-		</div>
+		</div>		
 	</div>
 	<div class="divTr">
 		<label class="divTdLeft">年龄:</label>
@@ -35,6 +35,18 @@
 				<option value="0">男</option>
 				<option value="1">女</option>
 			</select>
+		</div>
+	</div>
+	<div class="divTr">
+		<label class="divTdLeft">角色:<span><font color="red">*</font></span></label>
+		<div class="divTd divTdRight">
+			<select id="roleid" class="required">
+			    <option value="">--请选择--</option>
+				<option value="2">管理层</option>
+				<option value="3">财务人员</option>
+				<option value="4">库管</option>
+				<option value="5">业务员</option>
+			</select>			
 		</div>
 	</div>
 		<div class="divTr">
@@ -53,8 +65,7 @@
 	<div class="divTr">
 		<label class="divTdLeft">地址:</label>
 		<div class="divTd">
-			<textarea id="address" rows="2" cols="35" class="isLengthOf" v_maxlength="512"></textarea>
-			
+			<textarea id="address" rows="2" cols="35" class="isLengthOf" v_maxlength="512"></textarea>			
 		</div>
 	</div>
 </div>
