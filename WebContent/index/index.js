@@ -78,9 +78,7 @@ function Index() {
 					},
 					buttons : [ {
 						text : "保存",
-						click : function() {
-							// TODO
-						}
+						click : me.doChangePwd
 					}, {
 						text : "取消",
 						click : function() {
@@ -93,8 +91,65 @@ function Index() {
 	};
 
 	me.doChangePwd = function() {
-		
+		var params = {
+			accName : jQuery("#mAccName").val(),
+			originPwd : jQuery("#mOriginPwd").val(),
+			newPwd : jQuery("#mNewPwd").val()
+		};
+		var passCheck = checkChangePwd(params);
+		if (passCheck) {
+			jQuery.ajax({
+				url : "door/updatePwd",
+				type : "post",
+				data : params,
+				dataType : "json",
+				success : function(data) {
+					if (data.ok == false) {
+						alert(data.errorDesc);
+						return;
+					} else {
+						alert("修该密码成功!");
+						jQuery("#" + changePwdDialogId).dialog("close");
+					}
+				}
+			});
+		}
 	};
+
+	var checkChangePwd = function(params) {
+		var newPwdDup = jQuery("#mNewPwdDup").val();
+		if (ant.isEmpty(params.accName)) {
+			alert("用户名不能为空！");
+			jQuery("#mAccName").focus();
+			return false;
+		}
+		if (ant.isEmpty(params.originPwd)) {
+			alert("原密码不能为空！");
+			jQuery("#mOriginPwd").focus();
+			return false;
+		}
+
+		if (params.newPwd == "123456") {
+			alert("123456不能作为密码！");
+			jQuery("#mNewPwd").focus();
+			return false;
+		}
+
+		if (ant.isEmpty(params.newPwd)) {
+			alert("新密码不能为空！");
+			jQuery("#mNewPwd").focus();
+			return false;
+		}
+
+		if (newPwdDup != params.newPwd) {
+			alert("新密码两次输入不一致！");
+			jQuery("#mNewPwd").focus();
+			return false;
+		}
+
+		return true;
+	};
+
 }
 
 jQuery(document).ready(function() {

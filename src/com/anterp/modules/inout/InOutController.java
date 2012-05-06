@@ -18,6 +18,7 @@ import com.anterp.modules.Controllers;
 import com.anterp.mybatis.domain.Account;
 import com.anterp.mybatis.domain.AccountExample;
 import com.anterp.mybatis.mapper.AccountMapper;
+import com.anterp.tool.DateUtil;
 
 @Controller
 @RequestMapping("/door")
@@ -49,7 +50,8 @@ public class InOutController {
 			model.addAttribute("jsessionid", httpSession.getId());
 		} else {
 			// TODO 临时先这么返回错误
-			Controllers.setError(model, "001", "Account or password error.");
+			Controllers.setError(model, "Inout.001",
+					"Account or password error.");
 		}
 		return Controllers.JsonViewName;
 	}
@@ -74,4 +76,25 @@ public class InOutController {
 		return "redirect:" + Controllers.IndexJSP;
 	}
 
+	@RequestMapping("/updatePwd")
+	public String updateAccountPwd(@RequestParam("accName") String accName,
+			@RequestParam("originPwd") String originPwd,
+			@RequestParam("newPwd") String newPwd, Model model) {
+		AccountExample example = new AccountExample();
+		example.createCriteria().andAccnameEqualTo(accName)
+				.andAccpwdEqualTo(originPwd);
+		List<Account> accounts = accountMapper.selectByExample(example);
+		if (accounts.size() == 1) {
+			Account account = accounts.get(0);
+			Account accObj = new Account();
+			accObj.setAccid(account.getAccid());
+			accObj.setAccpwd(newPwd);
+			accObj.setLastmodifytime(DateUtil.getCurrentTime());
+			this.accountMapper.updateByPrimaryKeySelective(accObj);
+			Controllers.setSuccess(model);
+		} else {
+			Controllers.setError(model, "Inout.002", "修改密码失败，帐户名或者密码错误.");
+		}
+		return Controllers.JsonViewName;
+	}
 }
