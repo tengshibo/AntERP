@@ -5,14 +5,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomExample {
+public class CustomHistoryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CustomExample() {
+    public CustomHistoryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,6 +104,66 @@ public class CustomExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        public Criteria andAccidIsNull() {
+            addCriterion("accId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidIsNotNull() {
+            addCriterion("accId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidEqualTo(Integer value) {
+            addCriterion("accId =", value, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidNotEqualTo(Integer value) {
+            addCriterion("accId <>", value, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidGreaterThan(Integer value) {
+            addCriterion("accId >", value, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("accId >=", value, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidLessThan(Integer value) {
+            addCriterion("accId <", value, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidLessThanOrEqualTo(Integer value) {
+            addCriterion("accId <=", value, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidIn(List<Integer> values) {
+            addCriterion("accId in", values, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidNotIn(List<Integer> values) {
+            addCriterion("accId not in", values, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidBetween(Integer value1, Integer value2) {
+            addCriterion("accId between", value1, value2, "accid");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccidNotBetween(Integer value1, Integer value2) {
+            addCriterion("accId not between", value1, value2, "accid");
+            return (Criteria) this;
         }
 
         public Criteria andCustidIsNull() {
@@ -623,66 +683,6 @@ public class CustomExample {
 
         public Criteria andFamilydescNotBetween(String value1, String value2) {
             addCriterion("familyDesc not between", value1, value2, "familydesc");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeIsNull() {
-            addCriterion("createTime is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeIsNotNull() {
-            addCriterion("createTime is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeEqualTo(Timestamp value) {
-            addCriterion("createTime =", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeNotEqualTo(Timestamp value) {
-            addCriterion("createTime <>", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeGreaterThan(Timestamp value) {
-            addCriterion("createTime >", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeGreaterThanOrEqualTo(Timestamp value) {
-            addCriterion("createTime >=", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeLessThan(Timestamp value) {
-            addCriterion("createTime <", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeLessThanOrEqualTo(Timestamp value) {
-            addCriterion("createTime <=", value, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeIn(List<Timestamp> values) {
-            addCriterion("createTime in", values, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeNotIn(List<Timestamp> values) {
-            addCriterion("createTime not in", values, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("createTime between", value1, value2, "createtime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreatetimeNotBetween(Timestamp value1, Timestamp value2) {
-            addCriterion("createTime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
 

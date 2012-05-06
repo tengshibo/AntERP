@@ -50,8 +50,7 @@ function Custom() {
 		}, {
 			name : "age"
 		}, {
-			name : "birthday",
-			formatter : me.birthdayFormatter
+			name : "birthday"
 		}, {
 			name : "phoneno"
 		}, {
@@ -140,12 +139,8 @@ function Custom() {
 		jQuery("#custId").val(customObj.custid);
 		jQuery("#custName").val(customObj.custname);
 		jQuery("#gender").val(customObj.gender);
-		jQuery("#age").val(customObj.age);
-		var birth = new Date();
-		birth.setTime(customObj.birthday);
-		jQuery("#birthYear").val(birth.getFullYear());
-		jQuery("#birthMonth").val(birth.getMonth());
-		jQuery("#birthDay").val(birth.getDay());
+		jQuery("#age").val(customObj.age);		
+		jQuery("#birthDay").val(customObj.birthday);
 
 		jQuery("#phoneNo").val(customObj.phoneno);
 		jQuery("#address").val(customObj.address);
@@ -281,10 +276,7 @@ function Custom() {
 		customObj.custname = jQuery("#custName").val();
 		customObj.gender = jQuery("#gender").val();
 		customObj.age = jQuery("#age").val();
-		var birth = new Date();
-		birth.setFullYear(jQuery("#birthYear").val(), jQuery("#birthMonth")
-				.val(), jQuery("#birthDay").val());
-		customObj.birthday = birth.getTime();
+		customObj.birthday = jQuery("#birthDay").val();
 		customObj.phoneno = jQuery("#phoneNo").val();
 		customObj.address = jQuery("#address").val();
 		customObj.familydesc = jQuery("#familyDesc").val();

@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class Custom implements Serializable {
+public class CustomHistory implements Serializable {
+    private Integer accid;
+
     private Integer custid;
 
     private String custname;
@@ -21,11 +23,17 @@ public class Custom implements Serializable {
 
     private String familydesc;
 
-    private Timestamp createtime;
-
     private Timestamp lastmodifytime;
 
     private static final long serialVersionUID = 1L;
+
+    public Integer getAccid() {
+        return accid;
+    }
+
+    public void setAccid(Integer accid) {
+        this.accid = accid;
+    }
 
     public Integer getCustid() {
         return custid;
@@ -91,14 +99,6 @@ public class Custom implements Serializable {
         this.familydesc = familydesc;
     }
 
-    public Timestamp getCreatetime() {
-        return createtime;
-    }
-
-    public void setCreatetime(Timestamp createtime) {
-        this.createtime = createtime;
-    }
-
     public Timestamp getLastmodifytime() {
         return lastmodifytime;
     }
@@ -118,8 +118,9 @@ public class Custom implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Custom other = (Custom) that;
-        return (this.getCustid() == null ? other.getCustid() == null : this.getCustid().equals(other.getCustid()))
+        CustomHistory other = (CustomHistory) that;
+        return (this.getAccid() == null ? other.getAccid() == null : this.getAccid().equals(other.getAccid()))
+            && (this.getCustid() == null ? other.getCustid() == null : this.getCustid().equals(other.getCustid()))
             && (this.getCustname() == null ? other.getCustname() == null : this.getCustname().equals(other.getCustname()))
             && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
             && (this.getAge() == null ? other.getAge() == null : this.getAge().equals(other.getAge()))
@@ -127,7 +128,6 @@ public class Custom implements Serializable {
             && (this.getPhoneno() == null ? other.getPhoneno() == null : this.getPhoneno().equals(other.getPhoneno()))
             && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
             && (this.getFamilydesc() == null ? other.getFamilydesc() == null : this.getFamilydesc().equals(other.getFamilydesc()))
-            && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()))
             && (this.getLastmodifytime() == null ? other.getLastmodifytime() == null : this.getLastmodifytime().equals(other.getLastmodifytime()));
     }
 
@@ -135,6 +135,7 @@ public class Custom implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((getAccid() == null) ? 0 : getAccid().hashCode());
         result = prime * result + ((getCustid() == null) ? 0 : getCustid().hashCode());
         result = prime * result + ((getCustname() == null) ? 0 : getCustname().hashCode());
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
@@ -143,7 +144,6 @@ public class Custom implements Serializable {
         result = prime * result + ((getPhoneno() == null) ? 0 : getPhoneno().hashCode());
         result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
         result = prime * result + ((getFamilydesc() == null) ? 0 : getFamilydesc().hashCode());
-        result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
         result = prime * result + ((getLastmodifytime() == null) ? 0 : getLastmodifytime().hashCode());
         return result;
     }
