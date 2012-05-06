@@ -30,7 +30,7 @@ public class HttpFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		if (httpRequest.getSession().getAttribute(Controllers.AccInfo) == null) {
 			httpResponse.sendRedirect(httpRequest.getContextPath()
-					+ "/index.jsp");
+					+ Controllers.IndexJSP);
 			return;
 		}
 		chain.doFilter(request, response);

@@ -2,19 +2,20 @@ function Index() {
 	var me = this;
 
 	me.clickLoginButton = function() {
-		//check input .
-		if(!checksubmit(document.forms[0])){
-			return ;
-		};
-		
+		// check input .
+		if (!checksubmit(document.forms[0])) {
+			return;
+		}
+		;
+
 		var accName = jQuery("#accName").val();
 		var accPwd = jQuery("#accPwd").val();
-	    
+
 		var params = {
 			accName : accName,
 			accPwd : accPwd
 		};
-		
+
 		// invoke AntERPUtil to valid form
 		jQuery.ajax({
 			url : "door/check",
@@ -54,6 +55,10 @@ function Index() {
 
 		// alert("wh:" + wh + ",ww:" + ww);
 	};
+
+	me.changeAccountPwd = function() {
+		
+	};
 }
 
 jQuery(document).ready(function() {
@@ -65,5 +70,6 @@ jQuery(document).ready(function() {
 	var wresize = new Wresize();
 	wresize.attachWindowResize(indexObj.doResize);
 	jQuery("#loginBtn").unbind().bind("click", indexObj.clickLoginButton);
+	jQuery("#changePwdBtn").unbind().bind("click", indexObj.changeAccountPwd);
 
 });

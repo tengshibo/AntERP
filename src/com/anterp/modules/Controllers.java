@@ -3,7 +3,8 @@ package com.anterp.modules;
 import org.springframework.ui.Model;
 
 public class Controllers {
-
+	
+	public static final String IndexJSP = "/index/index.jsp";
 	public static final String AccInfo = "accountInfo";
 	public static final String AccInfoJson = "accountInfoJson";
 	public static final String JsonViewName = "aerpJsonView";

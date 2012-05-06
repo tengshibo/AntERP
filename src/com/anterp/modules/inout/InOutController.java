@@ -65,13 +65,13 @@ public class InOutController {
 			// 这个用viewResolver 也可以(OK)
 			// return "modules/init/main";
 		}
-		return "redirect:/index.jsp";
+		return "redirect:" + Controllers.IndexJSP;
 	}
 
 	@RequestMapping("/out")
 	public String checkOut(HttpSession httpSession) {
 		httpSession.invalidate();
-		return "redirect:/index.jsp";
+		return "redirect:" + Controllers.IndexJSP;
 	}
 
 }
