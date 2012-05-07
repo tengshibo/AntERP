@@ -8,7 +8,7 @@ function Account() {
 			height: "280px",
 			autowidth:true,
 			caption: "",
-			colNames : [ "账户ID","员工姓名","员工账户","账户状态", "年龄", "性别","移动电话","紧急联系电话","地址","创建日期","最后修改日期","操作" ],
+			colNames : [ "账户ID","员工姓名","员工账户","账户状态", "年龄", "性别","角色","移动电话","紧急联系电话","地址","创建日期","最后修改日期","操作" ],
 			colModel : [ 
 			    {name : "accid",hidden:true}, 
 			    {name : "empname"},
@@ -16,6 +16,7 @@ function Account() {
 			    {name : "status"}, 
 			    {name : "age"}, 
 			    {name : "gender"},
+			    {name : "roleid"},
 			    {name : "phoneno"},
 			    {name : "urgentphone",hidden:true},
 			    {name : "address",hidden:true},
@@ -51,8 +52,9 @@ function Account() {
 				afterInsertRow:function(id,rd,data){
 					jQuery("#accountListTable").jqGrid("setRowData",id,
 					    {	
-						status:getStatus(data.status),
-						gender:getGender(data.gender),
+						status:codeValue.statusValue(data.status),
+						gender:codeValue.genderValue(data.gender),
+						roleid:codeValue.roleValue(data.roleid),
 						act:"&nbsp;&nbsp;&nbsp;<input type='button'  value='详情' onclick='createAccount("+id+")'></input>"+
 							"&nbsp;&nbsp;&nbsp;<input type='button'  value='删除' onclick='delAccountById("+data.accid+")'></input>"
 					    }
@@ -244,25 +246,43 @@ var refreshDate = function(){
 };
 
 
+//代码表转换.
+var codeValue=new CodeToValue();
 
-//获取账户状态.
-var getStatus = function(key){
+function CodeToValue(){
+	var me =this;
+	//获取角色值.
+	me.roleValue=function(code){
+		switch(code){
+		case 1:  {return "超级用户";}
+		case 2:  {return "管理层";	}
+		case 3:  { return "财务人员";}
+		case 4:  {return "库管";}
+		case 5:  {return "业务员";}
+		default: {return code;}
+	  }
+	};	
 	
- switch(key){
-	case 0:  {return "正常";	}
-	case 1:  { return "冻结";}
-	default: {return key;   }
-  }
+   //获取性别	
+	me.genderValue=function(code){
+		switch(code){
+		case 0:  {return "男";	}
+		case 1:  { return "女";}
+		default: {return code;   }
+	    }		
+	};
+	//获取账户状态.
+	me.statusValue = function(code){		
+	 switch(code){
+		case 0:  {return "正常";	}
+		case 1:  { return "冻结";}
+		default: {return code;   }
+	  }
+	};
+	
 };
 
-var getGender =function(key){
-	switch(key){
-	case 0:  {return "男";	}
-	case 1:  { return "女";}
-	default: {return key;   }
-  }
-	
-};
+
 
 
 
