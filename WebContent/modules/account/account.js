@@ -185,7 +185,7 @@ function Account() {
 	  var account ={};
 	   account.empname=jQuery("#serEmpName").val();
 	   account.accname=jQuery("#serAccName").val();   	
-	   account.accname=jQuery("#serPhoneNo").val();
+	   account.phoneno=jQuery("#serPhoneNo").val();
 	   
 	   var params ={
 			account:JSON.stringify(account)		

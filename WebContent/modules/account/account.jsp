@@ -23,6 +23,10 @@
 <script type="text/javascript" src="js/validatebox.js"></script>
 </head>
 <body>
+	<div id="accountFuncDiv">
+    	<input id="createAccount" type="button"  value="新建账户"/>
+    	<input id="qryBt" type="button" value="查询" />	
+	</div>
   <div id="searchConditionDiv" >
    <div class="input">
    <table>
@@ -34,17 +38,9 @@
       <td>移动电话:</td>
       <td><input id="serPhoneNo" type="text" ></input></td>
      </tr>
-     	<tr align="center">		
-		<td colspan="6" align="center"> 
-		 <input id="qryBt" type="button" value="查询" />	
-		 <input id="createAccount" type="button"  value="新建账户"/>		
-		</tr>
    </table>
    </div>
   </div>
-    <div id="accountFuncDiv">
-		<input id="createAccount" type="button"  value="新建账户"/>
-	</div>
 	<table id="accountListTable"><tr><td/></tr></table>
 	<div id="accountListPager"></div>
 </body>
