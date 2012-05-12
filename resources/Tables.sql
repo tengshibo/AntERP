@@ -66,6 +66,7 @@ CREATE TABLE `tbl_custom` (
 
 CREATE TABLE `tbl_custom_history` (
   `accId` int(11) NOT NULL,
+  `status` int(11) DEFAULT 0,
   `custId` int(11) NOT NULL,
   `custName` varchar(64) DEFAULT NULL,
   `gender` smallint(6) DEFAULT NULL,

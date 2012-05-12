@@ -43,6 +43,7 @@
 		<url-pattern>*.jpg</url-pattern>
 		<url-pattern>*.png</url-pattern>
 		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 
 	<!-- Support restful URL -->

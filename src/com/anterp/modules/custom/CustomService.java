@@ -28,7 +28,7 @@ public class CustomService {
 		custom.setCreatetime(now);
 		custom.setLastmodifytime(now);
 		this.customMapper.insert(custom);
-		this.customHistoryMapper.insert(this.getCustomHistory(custom));
+		this.customHistoryMapper.insert(this.getCustomHistory_Update(custom));
 	}
 
 	@Transactional
@@ -37,19 +37,28 @@ public class CustomService {
 		// 更新客户信息
 		this.customMapper.updateByPrimaryKey(custom);
 		// 复制一份到客户历史信息表
-		this.customHistoryMapper.insert(this.getCustomHistory(custom));
+		this.customHistoryMapper.insert(this.getCustomHistory_Update(custom));
 	}
 
 	@Transactional
 	public void deleteCustom(int custId) {
+		Custom custom = this.customMapper.selectByPrimaryKey(custId);
 		this.customMapper.deleteByPrimaryKey(custId);
-		//TODO  将记录标记为删除
-		//this.customHistoryMapper.
+		this.customHistoryMapper.insert(this.getCustomHistory_Delete(custom));
 	}
 
-	private CustomHistory getCustomHistory(Custom custom) {
+	private CustomHistory getCustomHistory_Update(Custom custom) {
+		return this.getCustomHistory(custom, 0);
+	}
+
+	private CustomHistory getCustomHistory_Delete(Custom custom) {
+		return this.getCustomHistory(custom, 1);
+	}
+
+	private CustomHistory getCustomHistory(Custom custom, int mode) {
 		CustomHistory record = new CustomHistory();
 		record.setAccid(ThreadLocalUtils.getAccInfo().getAccid());
+		record.setStatus(mode);
 		record.setAddress(custom.getAddress());
 		record.setAge(custom.getAge());
 		record.setBirthday(custom.getBirthday());

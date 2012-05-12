@@ -19,6 +19,7 @@
 <script type="text/javascript" src="widget/jgUI/js/jquery-ui-1.8.20.custom.js"></script>
 <script src="widget/jqGrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
 <script src="widget/jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>
+<script src="widget/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 
 <script type="text/javascript" src="modules/custom/custom.js"></script>
 <link rel="stylesheet" type="text/css" href="modules/custom/custom.css" />

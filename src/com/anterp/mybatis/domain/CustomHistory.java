@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 public class CustomHistory implements Serializable {
     private Integer accid;
 
+    private Integer status;
+
     private Integer custid;
 
     private String custname;
@@ -33,6 +35,14 @@ public class CustomHistory implements Serializable {
 
     public void setAccid(Integer accid) {
         this.accid = accid;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getCustid() {
@@ -120,6 +130,7 @@ public class CustomHistory implements Serializable {
         }
         CustomHistory other = (CustomHistory) that;
         return (this.getAccid() == null ? other.getAccid() == null : this.getAccid().equals(other.getAccid()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getCustid() == null ? other.getCustid() == null : this.getCustid().equals(other.getCustid()))
             && (this.getCustname() == null ? other.getCustname() == null : this.getCustname().equals(other.getCustname()))
             && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
@@ -136,6 +147,7 @@ public class CustomHistory implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getAccid() == null) ? 0 : getAccid().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCustid() == null) ? 0 : getCustid().hashCode());
         result = prime * result + ((getCustname() == null) ? 0 : getCustname().hashCode());
         result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());

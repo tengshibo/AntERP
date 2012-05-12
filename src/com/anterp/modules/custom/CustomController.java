@@ -1,6 +1,5 @@
 package com.anterp.modules.custom;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -18,7 +17,6 @@ import com.anterp.modules.Pagers;
 import com.anterp.mybatis.domain.Custom;
 import com.anterp.mybatis.domain.CustomExample;
 import com.anterp.mybatis.mapper.CustomMapper;
-import com.anterp.tool.DateUtil;
 import com.anterp.tool.JsonUtil;
 
 @Controller

@@ -3,6 +3,7 @@
 <mapper namespace="com.anterp.mybatis.mapper.CustomHistoryMapper" >
   <resultMap id="BaseResultMap" type="com.anterp.mybatis.domain.CustomHistory" >
     <result column="accId" property="accid" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="custId" property="custid" jdbcType="INTEGER" />
     <result column="custName" property="custname" jdbcType="VARCHAR" />
     <result column="gender" property="gender" jdbcType="SMALLINT" />
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    accId, custId, custName, gender, age, birthday, phoneNo, address, familyDesc, lastModifyTime
+    accId, status, custId, custName, gender, age, birthday, phoneNo, address, familyDesc, 
+    lastModifyTime
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.anterp.mybatis.domain.CustomHistoryExample" >
     select
@@ -95,20 +97,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.anterp.mybatis.domain.CustomHistory" >
-    insert into tbl_custom_history (accId, custId, custName, 
-      gender, age, birthday, 
-      phoneNo, address, familyDesc, 
-      lastModifyTime)
-    values (#{accid,jdbcType=INTEGER}, #{custid,jdbcType=INTEGER}, #{custname,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=SMALLINT}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{phoneno,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{familydesc,jdbcType=VARCHAR}, 
-      #{lastmodifytime,jdbcType=TIMESTAMP})
+    insert into tbl_custom_history (accId, status, custId, 
+      custName, gender, age, 
+      birthday, phoneNo, address, 
+      familyDesc, lastModifyTime)
+    values (#{accid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{custid,jdbcType=INTEGER}, 
+      #{custname,jdbcType=VARCHAR}, #{gender,jdbcType=SMALLINT}, #{age,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{phoneno,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{familydesc,jdbcType=VARCHAR}, #{lastmodifytime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.anterp.mybatis.domain.CustomHistory" >
     insert into tbl_custom_history
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="accid != null" >
         accId,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="custid != null" >
         custId,
@@ -141,6 +146,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="accid != null" >
         #{accid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="custid != null" >
         #{custid,jdbcType=INTEGER},
@@ -183,6 +191,9 @@
       <if test="record.accid != null" >
         accId = #{record.accid,jdbcType=INTEGER},
       </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.custid != null" >
         custId = #{record.custid,jdbcType=INTEGER},
       </if>
@@ -218,6 +229,7 @@
   <update id="updateByExample" parameterType="map" >
     update tbl_custom_history
     set accId = #{record.accid,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
       custId = #{record.custid,jdbcType=INTEGER},
       custName = #{record.custname,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=SMALLINT},
