@@ -87,3 +87,4 @@ INSERT INTO `tbl_role` (roleId,`roleName`,lastModifyTime) VALUES (5,`业务员`,
 
 /* Insert built-in account. */
 INSERT INTO `tbl_account` (`accName`, `accPwd`, `createTime`, `lastModifyTime`) VALUES (`AntERP`, `123456`, `2012-04-21 12:00:00`, `2012-04-21 12:00:00`);$$
+INSERT INTO `tbl_acc_role` (`accId`,`roleId`)VALUES(1, 1);

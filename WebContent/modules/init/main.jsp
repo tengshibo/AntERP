@@ -13,6 +13,9 @@
 	if (!window.accountInfoJson) {
 		window.accountInfoJson = <%=session.getAttribute("accountInfoJson")%>;
 	}
+	if (!window.roleInfoJson) {
+		window.roleInfoJson = <%=session.getAttribute("roleInfoJson")%>;
+	}
 </script>
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
 <script type="text/javascript" src="js/wresize.js"></script>
@@ -23,7 +26,7 @@
 	<div id="topDiv">欢迎使用AntERP 系统<div id="logOutDiv">您好，<label id="loginedAccName"></label> [退出]</div></div>
 	<div id="downWrapperDiv">
 		<div id="leftMenu">
-			<div id="custom_menu" class="antMenu antMenuHighlight">客户资料</div>
+			<div id="custom_menu" class="antMenu">客户资料</div>
 			<div id="account_menu" class="antMenu">员工资料</div>
 		</div>
 		<div id="centerMain">

@@ -41,6 +41,7 @@ html {
 	margin-top: 10px;
 	cursor: pointer;
 	margin-top: 10px;
+	display: none;
 }
 
 .antMenuHighlight {

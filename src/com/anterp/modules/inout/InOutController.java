@@ -17,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.anterp.modules.Controllers;
 import com.anterp.mybatis.domain.Account;
 import com.anterp.mybatis.domain.AccountExample;
+import com.anterp.mybatis.domain.AccountRole;
+import com.anterp.mybatis.domain.AccountRoleExample;
+import com.anterp.mybatis.domain.RoleExample;
 import com.anterp.mybatis.mapper.AccountMapper;
+import com.anterp.mybatis.mapper.AccountRoleMapper;
+import com.anterp.mybatis.mapper.RoleMapper;
 import com.anterp.tool.DateUtil;
 
 @Controller
@@ -26,6 +31,9 @@ public class InOutController {
 
 	@Autowired
 	private AccountMapper accountMapper;
+
+	@Autowired
+	private AccountRoleMapper accountRoleMapper;
 
 	@RequestMapping("/check")
 	public String check(@RequestParam("accName") String accName,
@@ -51,7 +59,15 @@ public class InOutController {
 			String accountInfoJson = objectMapper.writeValueAsString(account);
 			httpSession.setAttribute(Controllers.AccInfoJson, accountInfoJson);
 
-			// session里还需要存放 "权限信息"(TODO)
+			// session里还需要存放 "权限信息"(TODO)， 先放入RoleInfo代替pvg
+			AccountRoleExample arExample = new AccountRoleExample();
+			arExample.createCriteria().andAccidEqualTo(account.getAccid());
+			List<AccountRole> accRole = this.accountRoleMapper
+					.selectByExample(arExample);
+			String roleInfoJson = objectMapper.writeValueAsString(accRole
+					.get(0));
+			httpSession.setAttribute(Controllers.RoleInfoJson, roleInfoJson);
+
 			Controllers.setSuccess(model);
 			model.addAttribute("jsessionid", httpSession.getId());
 		} else {

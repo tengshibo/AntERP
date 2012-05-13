@@ -46,6 +46,25 @@ function MainPage() {
 	};
 
 	me.refreshMenu = function() {
+		//alert(window.roleInfoJson);
+		var roleId = window.roleInfoJson.roleid;
+		if (roleId == 1) {// 管理员, 显示所有的tab，高亮账户资料
+			jQuery("#leftMenu .antMenu").each(function(index) {
+				jQuery(this).show();
+			});
+			jQuery("#leftMenu #account_menu").addClass("antMenuHighlight");
+		} else if (roleId == 2) {
+			jQuery("#leftMenu .antMenu").each(function(index) {
+				if (this.id != "account_menu") {
+					jQuery(this).show();
+				}
+			});
+		} else if (roleId == 5) {// 业务员
+			var custom_menu = jQuery("#leftMenu #custom_menu");
+			custom_menu.show();
+			custom_menu.addClass("antMenuHighlight");
+		}
+
 		jQuery("#leftMenu #custom_menu").click();
 	};
 }
