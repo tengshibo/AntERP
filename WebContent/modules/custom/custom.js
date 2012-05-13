@@ -124,7 +124,7 @@ function Custom() {
 		if (doDel == true) {
 			var params = {};
 			params.custId = custId;
-			jQuery.ajax({
+			ant.antAjax({
 				url : "modules/custom/delete",
 				type : "post",
 				async : false,
@@ -139,7 +139,7 @@ function Custom() {
 		jQuery("#custId").val(customObj.custid);
 		jQuery("#custName").val(customObj.custname);
 		jQuery("#gender").val(customObj.gender);
-		jQuery("#age").val(customObj.age);		
+		jQuery("#age").val(customObj.age);
 		jQuery("#birthDay").val(customObj.birthday);
 
 		jQuery("#phoneNo").val(customObj.phoneno);
@@ -151,7 +151,7 @@ function Custom() {
 		var customObj = me.getCustomDetilForm();
 		customObj = JSON.stringify(customObj);
 		var params = "custom=" + customObj;
-		jQuery.ajax({
+		ant.antAjax({
 			url : "modules/custom/update",
 			type : "post",
 			async : false,
@@ -240,7 +240,7 @@ function Custom() {
 		var customObj = me.getCustomDetilForm();
 		customObj = JSON.stringify(customObj);
 		var params = "custom=" + customObj;
-		jQuery.ajax({
+		ant.antAjax({
 			url : "modules/custom/create",
 			type : "post",
 			async : false,

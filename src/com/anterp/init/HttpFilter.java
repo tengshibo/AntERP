@@ -30,11 +30,19 @@ public class HttpFilter implements Filter {
 		response.setCharacterEncoding("UTF-8");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+
+		System.out.println(httpRequest.getRequestURI());
+
 		Account account = (Account) (httpRequest.getSession()
 				.getAttribute(Controllers.AccInfo));
 		if (account == null) {
-			httpResponse.sendRedirect(httpRequest.getContextPath()
-					+ Controllers.IndexJSP);
+			// 如果是jsp请求
+			if (httpRequest.getRequestURI().endsWith(".jsp")) {
+				httpResponse.sendRedirect(httpRequest.getContextPath()
+						+ Controllers.IndexJSP);
+			} else {// 其他的请求，filter猜测是ajax请求
+				Controllers.setSessionExpired(httpResponse);
+			}
 			return;
 		} else {
 			ThreadLocalUtils.setAccInfo(account);

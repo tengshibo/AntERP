@@ -16,6 +16,7 @@
 </script>
 <script type="text/javascript" src="js/json2.js"></script>
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/antUtil.js"></script>
 <script type="text/javascript" src="widget/jgUI/js/jquery-ui-1.8.20.custom.js"></script>
 <script src="widget/jqGrid/js/i18n/grid.locale-cn.js" type="text/javascript"></script>
 <script src="widget/jqGrid/js/jquery.jqGrid.src.js" type="text/javascript"></script>

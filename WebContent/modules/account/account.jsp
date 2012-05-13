@@ -13,6 +13,7 @@
 	}
 </script>
 <script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/antUtil.js"></script>
 <link rel="stylesheet" type="text/css" media="screen" href="widget/jgUI/css/ui-lightness/jquery-ui-1.8.20.custom.css" />
 <link rel="stylesheet" type="text/css" href="modules/account/account.css" />
 <script type="text/javascript" src="widget/jgUI/js/jquery-ui-1.8.20.custom.js"></script>

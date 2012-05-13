@@ -75,7 +75,7 @@ function Account() {
 				accId : accountId
 			};
 		
-		jQuery.ajax({
+		ant.antAjax({
 			url : "modules/account/delAccount",
 			type : "post",
 			data : params,
@@ -94,7 +94,7 @@ function Account() {
 	};
     //新建账户
 	me.createAccount =function(){
-		jQuery.ajax({
+		ant.antAjax({
 			url : "modules/account/accountDetail.html",
 			type : "post",
 			async : false,
@@ -156,7 +156,7 @@ function Account() {
 					 accrole:JSON.stringify(accRole)
 				  } ;
 		  
-		  jQuery.ajax({
+		  ant.antAjax({
 				url : url,
 				type : "post",
 				data : params,
