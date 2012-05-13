@@ -30,9 +30,7 @@ public class HttpFilter implements Filter {
 		response.setCharacterEncoding("UTF-8");
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-		System.out.println(httpRequest.getRequestURI());
-
+		// System.out.println(httpRequest.getRequestURI());
 		Account account = (Account) (httpRequest.getSession()
 				.getAttribute(Controllers.AccInfo));
 		if (account == null) {

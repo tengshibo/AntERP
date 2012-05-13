@@ -36,7 +36,13 @@ public class InOutController {
 		example.createCriteria().andAccnameEqualTo(accName)
 				.andAccpwdEqualTo(accPwd);
 		List<Account> accounts = accountMapper.selectByExample(example);
+
 		if (accounts.size() == 1) {
+			if ("123456".equals(accPwd)) {
+				Controllers.setError(model, "Inout.002", "请修改密码，默认密码不允许登陆.");
+				return Controllers.JsonViewName;
+			}
+
 			Account account = accounts.get(0);
 			// session里需要存放 "账户信息"
 			httpSession.setAttribute(Controllers.AccInfo, account);
