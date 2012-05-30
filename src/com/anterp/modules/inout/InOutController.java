@@ -19,10 +19,8 @@ import com.anterp.mybatis.domain.Account;
 import com.anterp.mybatis.domain.AccountExample;
 import com.anterp.mybatis.domain.AccountRole;
 import com.anterp.mybatis.domain.AccountRoleExample;
-import com.anterp.mybatis.domain.RoleExample;
 import com.anterp.mybatis.mapper.AccountMapper;
 import com.anterp.mybatis.mapper.AccountRoleMapper;
-import com.anterp.mybatis.mapper.RoleMapper;
 import com.anterp.tool.DateUtil;
 
 @Controller
@@ -52,6 +50,12 @@ public class InOutController {
 			}
 
 			Account account = accounts.get(0);
+			if(account.getStatus() == 1){
+				Controllers.setError(model, "Inout.003", "您的账户出现异常，请与管理员联系.");
+				return Controllers.JsonViewName;
+			}
+			
+			
 			// session里需要存放 "账户信息"
 			httpSession.setAttribute(Controllers.AccInfo, account);
 
@@ -64,10 +68,10 @@ public class InOutController {
 			arExample.createCriteria().andAccidEqualTo(account.getAccid());
 			List<AccountRole> accRole = this.accountRoleMapper
 					.selectByExample(arExample);
-			String roleInfoJson = objectMapper.writeValueAsString(accRole
-					.get(0));
-			httpSession.setAttribute(Controllers.RoleInfoJson, roleInfoJson);
-
+			AccountRole accountRole = accRole
+					.get(0);
+			String roleInfoJson = objectMapper.writeValueAsString(accountRole);
+			httpSession.setAttribute(Controllers.RoleInfoJson, roleInfoJson);			
 			Controllers.setSuccess(model);
 			model.addAttribute("jsessionid", httpSession.getId());
 		} else {

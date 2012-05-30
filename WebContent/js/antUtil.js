@@ -16,12 +16,14 @@ ant.antAjax = function(option) {
 			if (data.errorId == "session.001") {
 				top.location = "index/index.jsp";
 			}
-			return;
+			return true;
 		}
 		if (data.length <= 500 && data.indexOf('"errorId":"session.001"') >= 0
 				&& data.indexOf('"ok":false') >= 0) {
 			top.location = "index/index.jsp";
+			return true;
 		}
+		return false;
 	}
 
 	option.error = function(data) {
@@ -32,10 +34,12 @@ ant.antAjax = function(option) {
 		}
 	};
 	option.success = function(data) {
-		processLogOut(data);
-		if (typeof successHandler == "function") {
-			var env = option.context || this;
-			successHandler.call(env, data);
+		var logout = processLogOut(data);
+		if(logout==false){
+			if (typeof successHandler == "function") {
+				var env = option.context || this;
+				successHandler.call(env, data);
+			}
 		}
 	};
 

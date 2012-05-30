@@ -44,6 +44,11 @@ public class HttpFilter implements Filter {
 			return;
 		} else {
 			ThreadLocalUtils.setAccInfo(account);
+			ThreadLocalUtils.setIsAdmin(false);
+			Object isAdmin  = httpRequest.getSession().getAttribute("isAdmin");
+			if(isAdmin!=null && (Boolean)isAdmin == true){
+				ThreadLocalUtils.setIsAdmin(true);
+			}
 		}
 		chain.doFilter(request, response);
 	}

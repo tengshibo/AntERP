@@ -5,9 +5,9 @@ function Account() {
 			url :"modules/account/getAll",
 			datatype : "json",
 			mtype : "post",
-			height: "280px",
+			height : "100%",
 			autowidth:true,
-			caption: "",
+			caption: "员工账户资料",
 			colNames : [ "账户ID","员工姓名","员工账户","账户状态", "年龄", "性别","角色","移动电话","紧急联系电话","地址","创建日期","最后修改日期","操作" ],
 			colModel : [ 
 			    {name : "accid",hidden:true}, 
@@ -38,12 +38,12 @@ function Account() {
 					page : "page",
 					rows : "rows"
 				},	  
-				rowList:["10","50","100","500"],
+				rowList:["15","20","50","100","500"],
 				repeatitems:false,
 				viewrecords:true,
 				emptyrecords:"查询结果为空!",
 				pager :"accountListPager",
-				rowNum :10,
+				rowNum :20,
 	
 				onSelectRow:function(id){
 					
@@ -166,7 +166,6 @@ function Account() {
 						alert(data.errorDesc);
 						return;
 					} else {
-						alert
 						if(account.accid==""){
 							alert("添加账户成功!");
 						}else{

@@ -169,71 +169,70 @@ function Custom() {
 				"userData");
 		var rowCustom = userData[rowId - 1];
 
-		jQuery
-				.ajax({
-					url : "modules/custom/customDetail.html",
-					type : "post",
-					success : function(data) {
-						var content = '<div id="customDetailDialog">' + data
-								+ "</div>";
-						jQuery(content).dialog({
-							title : "客户信息",
-							modal : true,
-							resizable : false,
-							height : "auto",
-							width : "340",
-							open : function() {
-								me.renderCustomDetail(rowCustom);
-							},
-							close : function() {
-								jQuery("#customDetailDialog").remove();
-							},
-							buttons : [ {
-								text : "保存",
-								click : me.doUpdateCustom
-							}, {
-								text : "取消",
-								click : function() {
-									jQuery(this).dialog("close");
-									jQuery("#customDetailDialog").remove();
-								}
-							} ]
-						});
-					}
+		var option = {
+			url : "modules/custom/customDetail.html",
+			type : "post",
+			success : function(data) {
+				var content = '<div id="customDetailDialog">' + data + "</div>";
+				jQuery(content).dialog({
+					title : "客户信息",
+					modal : true,
+					resizable : false,
+					height : "auto",
+					width : "340",
+					open : function() {
+						me.renderCustomDetail(rowCustom);
+					},
+					close : function() {
+						jQuery("#customDetailDialog").remove();
+					},
+					buttons : [ {
+						text : "保存",
+						click : me.doUpdateCustom
+					}, {
+						text : "取消",
+						click : function() {
+							jQuery(this).dialog("close");
+							jQuery("#customDetailDialog").remove();
+						}
+					} ]
 				});
+			}
+		};
+
+		ant.antAjax(option);
 	};
 
 	// 新建客户资料
 	me.createCustom = function() {
-		jQuery
-				.ajax({
-					url : "modules/custom/customDetail.html",
-					type : "post",
-					success : function(data) {
-						var content = '<div id="customDetailDialog">' + data
-								+ "</div>";
-						jQuery(content).dialog({
-							title : "客户信息",
-							modal : true,
-							resizable : false,
-							height : "auto",
-							width : "340",
-							close : function() {
-								jQuery("#customDetailDialog").remove();
-							},
-							buttons : [ {
-								text : "保存",
-								click : me.doCreateCustom
-							}, {
-								text : "取消",
-								click : function() {
-									jQuery(this).dialog("close");
-									jQuery("#customDetailDialog").remove();
-								}
-							} ]
-						});
-					}
+		var option = {
+			url : "modules/custom/customDetail.html",
+			type : "post",
+			success : function(data) {
+				var content = '<div id="customDetailDialog">' + data + "</div>";
+				jQuery(content).dialog({
+					title : "客户信息",
+					modal : true,
+					resizable : false,
+					height : "auto",
+					width : "340",
+					close : function() {
+						jQuery("#customDetailDialog").remove();
+					},
+					buttons : [ {
+						text : "保存",
+						click : me.doCreateCustom
+					}, {
+						text : "取消",
+						click : function() {
+							jQuery(this).dialog("close");
+							jQuery("#customDetailDialog").remove();
+						}
+					} ]
 				});
+			}
+		};
+		ant.antAjax(option);
 	};
 
 	me.doCreateCustom = function() {

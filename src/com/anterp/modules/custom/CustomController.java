@@ -2,6 +2,8 @@ package com.anterp.modules.custom;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.RowBounds;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -94,6 +96,9 @@ public class CustomController {
 	public String updateCustom(@RequestParam("custom") String customStr,
 			Model model) {
 		try {
+			if (this.customService.isAccountDoEvilOperation()) {
+				Controllers.setSessionExpired(model);
+			}
 			Custom custom = JsonUtil.getObject(Custom.class, customStr);
 			this.customService.updateCustom(custom);
 			Controllers.setSuccess(model);
@@ -107,6 +112,9 @@ public class CustomController {
 	@RequestMapping("/delete")
 	public String deleteCustom(@RequestParam("custId") int custId, Model model) {
 		try {
+			if (this.customService.isAccountDoEvilOperation()) {
+				Controllers.setSessionExpired(model);
+			}
 			this.customMapper.deleteByPrimaryKey(custId);
 			Controllers.setSuccess(model);
 		} catch (Throwable t) {
