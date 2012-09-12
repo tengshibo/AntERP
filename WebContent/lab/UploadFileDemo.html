@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!-- http://10.10.7.160:8081/AntERP/test/UploadFileDemo.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#filedrag
+{
+	display: none;
+	font-weight: bold;
+	text-align: center;
+	padding: 1em 0;
+	margin: 1em 0;
+	color: #555;
+	border: 2px dashed #555;
+	border-radius: 7px;
+	cursor: default;
+}
+#filedrag.hover
+{
+	color: #f00;
+	border-color: #f00;
+	border-style: solid;
+	box-shadow: inset 0 3px 4px #888;
+}
+
+</style>
+
+<script type="text/javascript">
+	function getDom(id){
+		return document.getElementById(id);
+	}
+	
+	function outPut(msg){
+		var msgDom = getDom("messages");
+		//alert(msgDom.innerHTML);
+		msgDom.innerHTML = msg + msgDom.innerHTML;
+	}
+	
+	function onBodyLoad(){
+		if(window.File && window.FileList && window.FileReader){
+			doInit();
+		}
+	}
+	
+	function doInit(){
+		var fileselect = getDom("fileselect"), 
+			filedrag =  getDom("filedrag"),
+			submitbutton = getDom("submitbutton");
+		fileselect.addEventListener("change", FileSelectHandler, false);
+		var xhr = new XMLHttpRequest();
+		if(xhr.upload){
+			// file drop
+			filedrag.addEventListener("dragover", FileDragHover, false);
+			filedrag.addEventListener("dragleave", FileDragHover, false);
+			filedrag.addEventListener("drop", FileSelectHandler, false);
+			filedrag.style.display = "block";
+			// remove submit button
+			submitbutton.style.display = "none";
+		}
+		
+	}
+	
+	function FileDragHover(e){
+		var event = e || window.event;
+		event.stopPropagation();
+		event.preventDefault();
+		event.target.className = (event.type=="dragover"?"hover":"");
+	}
+	
+	// file selection
+	function FileSelectHandler(e) {
+		var event = e || window.event;
+		// cancel event and hover styling
+		FileDragHover(event);
+		// fetch FileList object
+		var files = event.target.files || event.dataTransfer.files;
+		// process all File objects
+		for (var i = 0, file; i <files.length; i++) {
+			file = files[i]
+			ParseFile2(file);
+		}
+	}
+	
+	function ParseFile2(file){		
+		outPut(
+				"<p>File information: <strong>" + file.name +
+				"</strong> type: <strong>" + file.type +
+				"</strong> size: <strong>" + file.size +
+				"</strong> bytes</p>"
+			);
+		
+		UploadFile(file);
+		return;
+		
+		// display text
+		if(file.type.indexOf("text")==0){
+			var reader =  new FileReader();
+			reader.onload = function(event){
+				var content = event.target.result.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+				content = "<p><strong>"+ file.name + ":</strong></p><pre>"+content+"</pre>";
+				outPut(content);
+			};
+			reader.readAsText(file);
+		}
+		//display an image
+		if(file.type.indexOf("image")==0){
+			var reader = new FileReader();
+			reader.onload = function(event){
+				var content = event.target.result;
+				content = "<p><strong>"+ file.name + ":</strong><img src='"+content+"'/></p>";
+				outPut(content);
+			};
+			reader.readAsDataURL(file);
+		}
+		
+	}
+	
+	function UploadFile(file){
+		var xhr = new XMLHttpRequest();
+		if(xhr.upload){
+			//start upload
+			var uploadURL = "/AntERP/common/uploadFile";
+			xhr.open("post", uploadURL, true);
+			var formData = new FormData();
+			formData.append("uploadFile", file);
+			xhr.send(formData);
+		}
+	}
+	
+	
+	function ParseFile1(file) {
+		outPut(
+			"<p>File information: <strong>" + file.name +
+			"</strong> type: <strong>" + file.type +
+			"</strong> size: <strong>" + file.size +
+			"</strong> bytes</p>"
+		);
+	}
+
+
+	
+	
+</script>
+</head>
+<body onload="onBodyLoad();">
+	<form id="upload" action="upload.php" method="POST"
+		enctype="multipart/form-data">
+		<fieldset>
+			<legend>HTML File Upload</legend>
+			<input type="hidden" id="max_file_size" name="max_file_size" value="300000" />
+			<div>
+				<label for="fileselect">Files to upload:</label> 
+				<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+				<div id="filedrag">or drop files here</div>
+			</div>
+			<div id="submitbutton">
+				<button type="submit">Upload Files</button>
+			</div>
+		</fieldset>
+	</form>
+	<div id="messages">
+		<p>Status Messages</p>
+	</div>
+</body>
+</html>
