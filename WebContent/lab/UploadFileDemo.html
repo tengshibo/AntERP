@@ -24,6 +24,25 @@
 	border-style: solid;
 	box-shadow: inset 0 3px 4px #888;
 }
+#progressBand
+{
+	display: block;
+	width: 500px;
+	height: 15px;
+	margin: 2px 0;
+	border: 1px inset #446;
+	border-radius: 5px;
+}
+#progress
+{
+	background: #0c0 none 0 0 no-repeat;
+	width: 0%;
+	height: 100%;
+}
+#progress p.failed
+{
+	background: #c00 none 0 0 no-repeat;
+}
 
 </style>
 
@@ -79,11 +98,11 @@
 		// process all File objects
 		for (var i = 0, file; i <files.length; i++) {
 			file = files[i]
-			ParseFile2(file);
+			ParseFile(file);
 		}
 	}
 	
-	function ParseFile2(file){		
+	function ParseFile(file){		
 		outPut(
 				"<p>File information: <strong>" + file.name +
 				"</strong> type: <strong>" + file.type +
@@ -117,9 +136,16 @@
 		
 	}
 	
+	function showUploadProgress(e){
+		var event = e || window.event;
+		var percent = e.loaded/e.total * 100;
+		getDom("progress").style.width = percent+"%";
+	}
+	
 	function UploadFile(file){
 		var xhr = new XMLHttpRequest();
 		if(xhr.upload){
+			xhr.upload.addEventListener("progress", showUploadProgress, false);
 			//start upload
 			var uploadURL = "/AntERP/common/uploadFile";
 			xhr.open("post", uploadURL, true);
@@ -128,19 +154,6 @@
 			xhr.send(formData);
 		}
 	}
-	
-	
-	function ParseFile1(file) {
-		outPut(
-			"<p>File information: <strong>" + file.name +
-			"</strong> type: <strong>" + file.type +
-			"</strong> size: <strong>" + file.size +
-			"</strong> bytes</p>"
-		);
-	}
-
-
-	
 	
 </script>
 </head>
@@ -151,6 +164,7 @@
 		<fieldset>
 			<legend>HTML File Upload</legend>
 			<input type="hidden" id="max_file_size" name="max_file_size" value="300000" />
+			<div id="progressBand"><div id="progress"></div></div>
 			<div>
 				<label for="fileselect">Files to upload:</label> 
 				<input type="file" id="fileselect" name="fileselect[]" multiple="multiple" webkitdirectory="" />
