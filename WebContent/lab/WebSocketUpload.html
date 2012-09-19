@@ -13,13 +13,35 @@
 	}
 
 	function initChat() {
+		var wsURL = "ws://localhost:8081/AntERP/lab/ws/message";
+		var ws = null;
+		if(window.WebSocket){
+			var ws =  new WebSocket(wsURL);
+		}else{
+			alert("Your browser do not support WebSocket!");
+			return;
+		}
+		
+		if(ws!=null){
+			ws.onopen = function(){
+				alert("Open ws.");
+			};
+			ws.onmessage = function(event){
+				alert("Server said:"+event.data);
+			};
+			/* ws.onclose = function(){
+				alert("Close ws.");
+			}; */
+			var sendMsg = document.getElementById("sendMsg");
+			sendMsg.onclick = function(){
+				ws.send("dd ss");
+			};
+		}
 		
 	}
 </script>
 </head>
 <body onload="onBodyLoad();">
-
-
-
+	<input type="button"  id="sendMsg" value="SendMessage"/>
 </body>
 </html>
